@@ -6,7 +6,7 @@
 [![License](https://poser.pugx.org/tomatophp/filament-language-switcher/license.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
 [![Downloads](https://poser.pugx.org/tomatophp/filament-language-switcher/d/total.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
 
-Switch between languages on your app using user base column on database or cookies
+Switch between languages on your app using user base column on database
 
 ## Installation
 

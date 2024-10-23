@@ -2,10 +2,10 @@
     "name": "FilamentLanguageSwitcher",
     "alias": "filament-language-switcher",
     "description": {
-        "ar": "Switch between lanuages on your app using user base column on database or cookies",
-        "en": "Switch between lanuages on your app using user base column on database or cookies",
-        "gr": "Switch between lanuages on your app using user base column on database or cookies",
-        "sp": "Switch between lanuages on your app using user base column on database or cookies"
+        "ar": "Switch between lanuages on your app using user base column on database",
+        "en": "Switch between lanuages on your app using user base column on database",
+        "gr": "Switch between lanuages on your app using user base column on database",
+        "sp": "Switch between lanuages on your app using user base column on database"
     },
     "keywords": [],
     "priority": 0,

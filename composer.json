@@ -1,7 +1,7 @@
 {
     "name": "tomatophp/filament-language-switcher",
     "type": "library",
-    "description": "Switch between lanuages on your app using user base column on database or cookies",
+    "description": "Switch between languages on your app using user base column on database",
     "keywords": [
         "php",
         "laravel",
