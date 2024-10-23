@@ -1,4 +1,4 @@
-![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/art/3x1io-tomato-language-switcher.jpg)
+![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/3x1io-tomato-language-switcher.jpg)
 
 # Filament Language Switcher
 
@@ -7,6 +7,13 @@
 [![Downloads](https://poser.pugx.org/tomatophp/filament-language-switcher/d/total.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
 
 Switch between languages on your app using user base column on database
+
+## Screenshots
+
+![Switcher](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/switcher.png)
+![Dropdown Ar](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/artsdropdown-ar.png)
+![Dropdown En](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-en.png)
+
 
 ## Installation
 
