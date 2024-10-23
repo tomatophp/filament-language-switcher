@@ -1,0 +1,29 @@
+{
+    "name": "FilamentLanguageSwitcher",
+    "alias": "filament-language-switcher",
+    "description": {
+        "ar": "Switch between lanuages on your app using user base column on database or cookies",
+        "en": "Switch between lanuages on your app using user base column on database or cookies",
+        "gr": "Switch between lanuages on your app using user base column on database or cookies",
+        "sp": "Switch between lanuages on your app using user base column on database or cookies"
+    },
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "TomatoPHP\\FilamentLanguageSwitcher\\FilamentLanguageSwitcherServiceProvider"
+    ],
+    "files": [],
+    "title": {
+        "ar": "Filament language switcher",
+        "en": "Filament language switcher",
+        "gr": "Filament language switcher",
+        "sp": "Filament language switcher"
+    },
+    "color": "#cc1448",
+    "icon": "heroicon-c-users",
+    "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/art/screenshot.jpg",
+    "type": "plugin",
+    "version": "v1.0.0",
+    "github" : "https://github.com/tomatophp/filament-language-switcher",
+    "docs" : "https://github.com/tomatophp/filament-language-switcher"
+}
