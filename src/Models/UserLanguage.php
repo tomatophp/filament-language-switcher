@@ -3,6 +3,7 @@
 namespace TomatoPHP\FilamentLanguageSwitcher\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class UserLanguage extends Model
 {
@@ -12,7 +13,15 @@ class UserLanguage extends Model
         'lang',
     ];
 
-    public function model()
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * @return MorphTo
+     */
+    public function model(): MorphTo
     {
         return $this->morphTo();
     }
