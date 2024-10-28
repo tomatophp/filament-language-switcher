@@ -18,9 +18,6 @@ class UserLanguage extends Model
         'updated_at',
     ];
 
-    /**
-     * @return MorphTo
-     */
     public function model(): MorphTo
     {
         return $this->morphTo();
