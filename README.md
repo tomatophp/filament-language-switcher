@@ -4,7 +4,7 @@
 
 [![Dependabot Updates](https://github.com/tomatophp/filament-language-switcher/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/tomatophp/filament-language-switcher/actions/workflows/dependabot/dependabot-updates)
 [![PHP Code Styling](https://github.com/tomatophp/filament-language-switcher/actions/workflows/fix-php-code-styling.yml/badge.svg)](https://github.com/tomatophp/filament-language-switcher/actions/workflows/fix-php-code-styling.yml)
-[![Tests](https://github.com/tomatophp/filament-language-switcher/actions/workflows/tests.yml/badge.svg)](https://github.com/tomatophp/filament-language-switcher/actions/workflows/tests.yml)
+[![Tests](https://github.com/tomatophp/filament-language-switcher/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/tomatophp/filament-language-switcher/actions/workflows/tests.yml)
 [![Latest Stable Version](https://poser.pugx.org/tomatophp/filament-language-switcher/version.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
 [![License](https://poser.pugx.org/tomatophp/filament-language-switcher/license.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
 [![Downloads](https://poser.pugx.org/tomatophp/filament-language-switcher/d/total.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
