@@ -14,7 +14,7 @@ class LanguageController
         $request->validate([
             'lang' => 'required|string',
             'model' => 'required|string',
-            'model_id' => 'required|integer',
+            'model_id' => 'required',
         ]);
 
         $lang = UserLanguage::query()
