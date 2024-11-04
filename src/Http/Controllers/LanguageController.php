@@ -15,7 +15,7 @@ class LanguageController
         $request->validate([
             'lang' => 'required|string',
             'model' => 'required|string',
-            'model_id' => 'required|integer',
+            'model_id' => 'required',
         ]);
 
         if (Schema::hasColumn(app($request->get('model'))->getTable(), 'lang')) {
