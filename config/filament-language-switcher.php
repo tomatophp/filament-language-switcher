@@ -67,4 +67,14 @@ return [
     |
     */
     'redirect' => 'next',
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Language Table
+    |--------------------------------------------------------------------------
+    |
+    | set the user language table to store the user language, if your model don't have lang field
+    |
+    */
+    'allow_user_lang_table' => true,
 ];

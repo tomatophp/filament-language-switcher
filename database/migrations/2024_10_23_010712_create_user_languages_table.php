@@ -8,13 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('user_languages', function (Blueprint $table) {
-            $table->id();
-            $table->string('model_id');
-            $table->string('model_type');
-            $table->string('lang')->default('en')->nullable();
-            $table->timestamps();
-        });
+        if (config('filament-language-switcher.allow_user_lang_table')) {
+            Schema::create('user_languages', function (Blueprint $table) {
+                $table->id();
+                $table->string('model_id');
+                $table->string('model_type');
+                $table->string('lang')->default('en')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ namespace TomatoPHP\FilamentLanguageSwitcher\Http\Controllers;
 use Filament\Notifications\Notification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use TomatoPHP\FilamentLanguageSwitcher\Models\UserLanguage;
 
 class LanguageController
@@ -17,20 +18,26 @@ class LanguageController
             'model_id' => 'required|integer',
         ]);
 
-        $lang = UserLanguage::query()
-            ->where('model_type', $request->get('model'))
-            ->where('model_id', $request->get('model_id'))
-            ->first();
-
-        if ($lang) {
-            $lang->lang = $request->get('lang');
-            $lang->save();
+        if (Schema::hasColumn(app($request->get('model'))->getTable(), 'lang')) {
+            $model = app($request->get('model'))->find($request->get('model_id'));
+            $model->lang = $request->get('lang');
+            $model->save();
         } else {
-            UserLanguage::query()->create([
-                'model_type' => $request->get('model'),
-                'model_id' => $request->get('model_id'),
-                'lang' => $request->get('lang'),
-            ]);
+            $lang = UserLanguage::query()
+                ->where('model_type', $request->get('model'))
+                ->where('model_id', $request->get('model_id'))
+                ->first();
+
+            if ($lang) {
+                $lang->lang = $request->get('lang');
+                $lang->save();
+            } else {
+                UserLanguage::query()->create([
+                    'model_type' => $request->get('model'),
+                    'model_id' => $request->get('model_id'),
+                    'lang' => $request->get('lang'),
+                ]);
+            }
         }
 
         Notification::make()
