@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Str;
 use TomatoPHP\FilamentLanguageSwitcher\Tests\Models\User;
 
@@ -49,6 +50,24 @@ it('can switch language to en', function () {
 it('can switch language to ar', function () {
     $response = get(route('languages.switcher', [
         'model' => get_class(auth('web')->user()),
+        'model_id' => auth()->user()->id,
+        'lang' => 'ar',
+    ]));
+
+    // Ensure the response status is OK (200)
+    $response->assertStatus(302);
+
+    $currentLang = auth('web')->user()->lang == 'ar';
+
+    expect($currentLang)->toBeTrue();
+});
+
+it('can switch language while using morphMap', function () {
+    // Register Relation MorphMap
+    Relation::morphMap(['user' => get_class(auth()->user())]);
+
+    $response = get(route('languages.switcher', [
+        'model' => get_class(auth()->user()),
         'model_id' => auth()->user()->id,
         'lang' => 'ar',
     ]));
