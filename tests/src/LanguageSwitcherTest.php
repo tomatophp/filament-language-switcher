@@ -1,8 +1,8 @@
 <?php
 
+use Filament\Notifications\Notification;
 use Illuminate\Support\Str;
 use TomatoPHP\FilamentLanguageSwitcher\Tests\Models\User;
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
@@ -60,3 +60,21 @@ it('can switch language to ar', function () {
 
     expect($currentLang)->toBeTrue();
 });
+
+it('sends a notification in the newly selected language', function (string $locale) {
+    $response = get(route('languages.switcher', [
+        'model' => get_class(auth('web')->user()),
+        'model_id' => auth()->user()->id,
+        'lang' => $locale,
+    ]));
+
+    // Ensure the response status is OK (200)
+    $response->assertStatus(302);
+
+    Notification::assertNotified(
+        Notification::make()
+            ->title(trans('filament-language-switcher::translation.notification', locale: $locale))
+            ->icon('heroicon-o-check-circle')
+            ->iconColor('success')
+    );
+})->with(['locale' => ['en', 'nl', 'ar', 'de']]);
