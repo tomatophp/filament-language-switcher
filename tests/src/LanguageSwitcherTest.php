@@ -1,5 +1,6 @@
 <?php
 
+
 use Filament\Notifications\Notification;
 use Illuminate\Support\Str;
 use TomatoPHP\FilamentLanguageSwitcher\Tests\Models\User;
@@ -60,6 +61,7 @@ it('can switch language to ar', function () {
 
     expect($currentLang)->toBeTrue();
 });
+
 
 it('sends a notification in the newly selected language', function (string $locale) {
     $response = get(route('languages.switcher', [

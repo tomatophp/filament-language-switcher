@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('user_languages');
+        Schema::dropIfExists('user_languages');
     }
 };

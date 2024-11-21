@@ -24,7 +24,7 @@ class LanguageController
             $model->save();
         } else {
             $lang = UserLanguage::query()
-                ->where('model_type', $request->get('model'))
+                ->where('model_type', app($request->get('model'))->getMorphClass())
                 ->where('model_id', $request->get('model_id'))
                 ->first();
 
@@ -33,7 +33,7 @@ class LanguageController
                 $lang->save();
             } else {
                 UserLanguage::query()->create([
-                    'model_type' => $request->get('model'),
+                    'model_type' => app($request->get('model'))->getMorphClass(),
                     'model_id' => $request->get('model_id'),
                     'lang' => $request->get('lang'),
                 ]);
