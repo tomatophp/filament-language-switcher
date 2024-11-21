@@ -60,3 +60,18 @@ it('can switch language to ar', function () {
 
     expect($currentLang)->toBeTrue();
 });
+
+it('can switch language to id', function () {
+    $response = get(route('languages.switcher', [
+        'model' => get_class(auth('web')->user()),
+        'model_id' => auth()->user()->id,
+        'lang' => 'id',
+    ]));
+
+    // Ensure the response status is OK (200)
+    $response->assertStatus(302);
+
+    $currentLang = auth('web')->user()->lang == 'id';
+
+    expect($currentLang)->toBeTrue();
+});
