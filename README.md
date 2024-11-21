@@ -37,7 +37,7 @@ finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
 now on your `User.php` model or any user model add this trait
 
 ```php
-use TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
+use \TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
 ```
 
 now you must see the switcher and you can change language as you like
