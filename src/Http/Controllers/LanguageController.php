@@ -41,7 +41,7 @@ class LanguageController
         }
 
         Notification::make()
-            ->title(trans('filament-language-switcher::translation.notification'))
+            ->title(trans('filament-language-switcher::translation.notification', locale: $request->get('lang')))
             ->icon('heroicon-o-check-circle')
             ->iconColor('success')
             ->send();
