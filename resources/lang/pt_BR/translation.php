@@ -7,6 +7,7 @@ return [
         'pt_BR' => 'Português (Brasil)',
         'my' => 'Birmanês',
         'de' => 'Alemão',
+        'id' => 'Indonésio',
     ],
     'notification' => 'Idioma alterado com sucesso',
 ];

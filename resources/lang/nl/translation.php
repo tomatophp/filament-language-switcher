@@ -7,6 +7,7 @@ return [
         'pt_BR' => 'Portugees (Brazilië)',
         'my' => 'Birmaans',
         'de' => 'Duits',
+        'id' => 'Indonesisch',
     ],
     'notification' => 'Taal is succesvol gewijzigd',
 ];
