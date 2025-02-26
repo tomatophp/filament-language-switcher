@@ -16,11 +16,55 @@ return [
         ],
         'ar' => [
             'label' => 'Arabic',
-            'flag' => 'eg',
+            'flag' => 'sa',
+        ],
+        'fr' => [
+            'label' => 'French',
+            'flag' => 'fr',
+        ],
+        'it' => [
+            'label' => 'Italian',
+            'flag' => 'it',
+        ],
+        'es' => [
+            'label' => 'Spanish',
+            'flag' => 'es',
+        ],
+        'de' => [
+            'label' => 'German',
+            'flag' => 'de',
         ],
         'pt_BR' => [
             'label' => 'Português (Brasil)',
             'flag' => 'br',
+        ],
+        'pt_PT' => [
+            'label' => 'Portuguese (Portugal)',
+            'flag' => 'pt',
+        ],
+        'zh' => [
+            'label' => 'Chinese',
+            'flag' => 'cn',
+        ],
+        'ko' => [
+            'label' => 'Korean',
+            'flag' => 'kr',
+        ],
+        'ja' => [
+            'label' => 'Japanese',
+            'flag' => 'jp',
+        ],
+        'hi' => [
+            'label' => 'Hindi',
+            'flag' => 'in',
+        ],
+        'ru' => [
+            'label' => 'Russian',
+            'flag' => 'ru',
+        ],
+        'tr' => [
+            'label' => 'Turkish',
+            'flag' => 'tr',
         ],
         'my' => [
             'label' => 'Burmese',
@@ -29,7 +73,7 @@ return [
         'id' => [
             'label' => 'Indonesian',
             'flag' => 'id',
-        ],
+        ]
     ],
 
     /*

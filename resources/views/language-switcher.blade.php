@@ -31,9 +31,13 @@ if(!function_exists('try_svg')) {
         x-on:click="toggle"
     >
         <div
+            x-tooltip="{
+                content: '{{ trans('filament-language-switcher::translation.change') }}',
+                theme: $store.theme,
+            }"
             @class([
-                'flex items-center justify-center rounded-sm bg-cover bg-center',
-                'w-8 h-6 bg-gray-200 dark:bg-gray-900'
+                'flex items-center justify-center rounded-sm bg-cover bg-center rounded-md',
+                'w-11 h-8 bg-gray-200 dark:bg-gray-900 border border-gray-200 dark:border-gray-700'
             ])
             style="background-image: url('https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/{{config('filament-language-switcher.locals')[app()->getLocale()]['flag']?:null}}.svg')"
         >
@@ -58,9 +62,9 @@ if(!function_exists('try_svg')) {
                     <span class="filament-dropdown-list-item-label truncate text-start flex justify-content-start gap-3">
                        <div
                             @class([
-                                'w-6 h-4'
+                                'w-6 h-5 rounded-md bg-cover bg-center border border-gray-200 dark:border-gray-700',
                             ])
-                            style="background-image: url('https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/{{$language['flag']}}.svg')"
+                            style="background-image: url('https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/{{$language['flag']}}.svg'); background-repeat: no-repeat"
                         >
 
                         </div>
