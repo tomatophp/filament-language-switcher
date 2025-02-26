@@ -1,8 +1,8 @@
 <?php
 
 return [
-    //Translate to Chinese
-    'change' => "更改语言",
+    // Translate to Chinese
+    'change' => '更改语言',
     'lang' => [
         'ar' => '阿拉伯语',
         'en' => '英语',
@@ -39,7 +39,7 @@ return [
         'bg' => '保加利亚语',
         'lt' => '立陶宛语',
         'lv' => '拉脱维亚语',
-        'et' => '爱沙尼亚语'
+        'et' => '爱沙尼亚语',
     ],
     'notification' => 'Language has been changed successfully',
 ];

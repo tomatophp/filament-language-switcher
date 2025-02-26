@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'change' => "Alterar Idioma",
+    'change' => 'Alterar Idioma',
     'lang' => [
         'ar' => 'Árabe',
         'en' => 'Inglês',

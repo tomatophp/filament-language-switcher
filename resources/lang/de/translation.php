@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'change' => "Sprache ändern",
+    'change' => 'Sprache ändern',
     'lang' => [
         'ar' => 'Arabisch',
         'en' => 'Englisch',
@@ -38,7 +38,7 @@ return [
         'bg' => 'Bulgarisch',
         'lt' => 'Litauisch',
         'lv' => 'Lettisch',
-        'et' => 'Estnisch'
+        'et' => 'Estnisch',
     ],
     'notification' => 'Sprache wurde erfolgreich geändert',
 

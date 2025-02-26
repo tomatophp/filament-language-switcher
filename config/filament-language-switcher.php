@@ -73,7 +73,7 @@ return [
         'id' => [
             'label' => 'Indonesian',
             'flag' => 'id',
-        ]
+        ],
     ],
 
     /*

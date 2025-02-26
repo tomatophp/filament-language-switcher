@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'change' => "Taal wijzigen",
+    'change' => 'Taal wijzigen',
     'lang' => [
         'ar' => 'Arabisch',
         'en' => 'Engels',
@@ -38,7 +38,7 @@ return [
         'bg' => 'Bulgaars',
         'lt' => 'Litouws',
         'lv' => 'Lets',
-        'et' => 'Ests'
+        'et' => 'Ests',
     ],
     'notification' => 'Taal is succesvol gewijzigd',
 ];

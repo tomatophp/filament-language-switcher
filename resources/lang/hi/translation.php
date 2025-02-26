@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'change' => "भाषा बदलें",
+    'change' => 'भाषा बदलें',
     'lang' => [
         'ar' => 'अरबी',
         'en' => 'अंग्रेज़ी',
@@ -38,7 +38,7 @@ return [
         'bg' => 'बल्गेरियाई',
         'lt' => 'लिथुआनियाई',
         'lv' => 'लातवियाई',
-        'et' => 'एस्टोनियाई'
+        'et' => 'एस्टोनियाई',
     ],
     'notification' => 'Language has been changed successfully',
 ];

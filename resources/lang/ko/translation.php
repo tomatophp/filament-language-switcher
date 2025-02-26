@@ -1,8 +1,8 @@
 <?php
 
 return [
-    //Translate to Korean
-    'change' => "언어 변경",
+    // Translate to Korean
+    'change' => '언어 변경',
     'lang' => [
         'ar' => '아랍어',
         'en' => '영어',

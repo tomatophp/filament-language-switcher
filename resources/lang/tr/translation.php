@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'change' => "Dil Değiştir",
+    'change' => 'Dil Değiştir',
     'lang' => [
         'ar' => 'Arapça',
         'en' => 'İngilizce',
