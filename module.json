@@ -21,9 +21,9 @@
     },
     "color": "#cc1448",
     "icon": "heroicon-c-users",
-    "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/art/screenshot.jpg",
+    "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/3x1io-tomato-language-switcher.jpg",
     "type": "plugin",
-    "version": "v1.0.0",
+    "version": "v1.0.6",
     "github" : "https://github.com/tomatophp/filament-language-switcher",
     "docs" : "https://github.com/tomatophp/filament-language-switcher"
 }
