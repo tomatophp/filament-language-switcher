@@ -52,7 +52,7 @@
     "require": {
         "php": "^8.2|^8.3|^8.4",
         "tomatophp/console-helpers": "^1.1",
-        "filament/filament": "^4.0"
+        "filament/filament": "^4.0-beta"
     },
     "require-dev": {
         "laravel/pint": "^1.21",
