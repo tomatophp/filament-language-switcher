@@ -1,5 +1,8 @@
 <?php
 
+use Filament\View\PanelsRenderHook;
+
+
 return [
     /*
      |--------------------------------------------------------------------------
@@ -12,7 +15,7 @@ return [
     'locals' => [
         'en' => [
             'label' => 'English',
-            'flag' => 'us',
+            'flag' => 'gb',
         ],
         'ar' => [
             'label' => 'Arabic',
@@ -94,7 +97,7 @@ return [
     |
     */
 
-    'language_switcher_render_hook' => 'panels::user-menu.before',
+    'language_switcher_render_hook' => PanelsRenderHook::USER_MENU_BEFORE,
 
     /*
      |--------------------------------------------------------------------------
