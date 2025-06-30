@@ -52,7 +52,7 @@
     "require": {
         "php": "^8.2|^8.3|^8.4",
         "tomatophp/console-helpers": "^1.1",
-        "filament/filament": "^3.3"
+        "filament/filament": "^4.0"
     },
     "require-dev": {
         "laravel/pint": "^1.21",
@@ -66,5 +66,5 @@
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0"
     },
-    "version": "v1.0.6"
+    "version": "4.0.0"
 }
