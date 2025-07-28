@@ -8,27 +8,26 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
 beforeEach(function () {
-    actingAs(User::factory()->create());
+    $user = User::factory()->create();
+    actingAs($user);
 });
 
 it('has a language switcher', function () {
-    // Render the view
-    // Perform a GET request to fetch the HTML content of the page
-    $response = get(\Filament\Pages\Dashboard::getUrl()); // replace with your route
+    // // Ensure the response status is OK (200)
+    $response = get(\Filament\Pages\Dashboard::getUrl());
 
-    // Ensure the response status is OK (200)
     $response->assertStatus(200);
 
-    // Get the HTML content of the response
+    // // Get the HTML content of the response
     $html = $response->getContent();
 
-    // Use Laravel's native Crawler (based on Symfony's DomCrawler)
+    // // Use Laravel's native Crawler (based on Symfony's DomCrawler)
     $crawler = Str::of($html);
 
-    // Check if the element with the specific ID exists
+    // // Check if the element with the specific ID exists
     $elementExists = $crawler->contains('id="filament-language-switcher"'); // replace 'your-id-here' with the actual id you're checking
 
-    // Assert that the element exists
+    // // Assert that the element exists
     expect($elementExists)->toBeTrue();
 });
 

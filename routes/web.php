@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/languages/switcher', [\TomatoPHP\FilamentLanguageSwitcher\Http\Controllers\LanguageController::class, 'index'])
-    ->middleware(config('filament-language-switcher.language_switcher_middlewares'))
-    ->name('languages.switcher');
+    ->name('languages.switcher')
+    ->middleware(config('filament-language-switcher.language_switcher_middlewares'));
