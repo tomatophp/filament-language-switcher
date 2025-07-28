@@ -13,9 +13,10 @@ Switch between languages on your app using user base column on database
 
 ## Screenshots
 
-![Switcher](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/switcher.png)
-![Dropdown Ar](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-ar.png)
-![Dropdown En](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-en.png)
+![Switcher Light](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/switcher-light.png)
+![RTL](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/rtl.png)
+![Dropdown Light](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-light.png)
+![Dropdown Dark](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-dark.png)
 
 ## Installation
 
