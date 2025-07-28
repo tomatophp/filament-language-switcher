@@ -12,12 +12,12 @@ if(!function_exists('try_svg')) {
 @endphp
 
 
-<x-filament::dropdown>
+<x-filament::dropdown >
     <x-slot name="trigger">
         <x-filament::avatar x-tooltip="{
             content: '{{ trans('filament-language-switcher::translation.change') }}',
             theme: $store.theme,
-        }" size="sm" src="https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/{{config('filament-language-switcher.locals')[app()->getLocale()]['flag']?:null}}.svg" />
+        }" id="filament-language-switcher" size="sm" src="https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/{{config('filament-language-switcher.locals')[app()->getLocale()]['flag']?:null}}.svg" />
     </x-slot>
 
     @foreach ($otherLanguages as $key=>$language)

@@ -1,0 +1,2453 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.github/
+  ISSUE_TEMPLATE/
+    bug.yml
+    config.yaml
+  workflows/
+    dependabot-auto-merge.yml
+    fix-php-code-styling.yml
+    tests.yml
+  CONTRIBUTING.md
+  dependabot.yml
+  FUNDING.yml
+  SECURITY.md
+config/
+  filament-language-switcher.php
+database/
+  migrations/
+    2024_10_23_010712_create_user_languages_table.php
+resources/
+  lang/
+    ar/
+      translation.php
+    de/
+      translation.php
+    en/
+      translation.php
+    es/
+      translation.php
+    fr/
+      translation.php
+    hi/
+      translation.php
+    id/
+      translation.php
+    it/
+      translation.php
+    ja/
+      translation.php
+    ko/
+      translation.php
+    my/
+      translation.php
+    nl/
+      translation.php
+    pt_BR/
+      translation.php
+    pt_PT/
+      translation.php
+    ru/
+      translation.php
+    tr/
+      translation.php
+    zh/
+      translation.php
+  views/
+    language-switcher.blade.php
+routes/
+  web.php
+src/
+  Console/
+    FilamentLanguageSwitcherInstall.php
+  Http/
+    Controllers/
+      LanguageController.php
+    Middleware/
+      LanguageMiddleware.php
+  Models/
+    UserLanguage.php
+  Traits/
+    InteractsWithLanguages.php
+  FilamentLanguageSwitcherPlugin.php
+  FilamentLanguageSwitcherServiceProvider.php
+tests/
+  database/
+    factories/
+      UserFactory.php
+  src/
+    Models/
+      User.php
+    AdminPanelProvider.php
+    DebugTest.php
+    InstallCommandTest.php
+    LanguageSwitcherTest.php
+    PluginTest.php
+    TestCase.php
+  Pest.php
+.gitignore
+3x1io-tomato-language-switcher.md
+CHANGELOG.md
+composer.json
+LICENSE.md
+module.json
+phpunit.xml
+README.md
+SECURITY.md
+testbench.yaml
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".github/ISSUE_TEMPLATE/bug.yml">
+name: Bug Report
+description: Report an Issue or Bug with the Package
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We're sorry to hear you have a problem. Can you help us solve it by providing the following details.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect to happen?
+      placeholder: I cannot currently do X thing because when I do, it breaks X thing.
+    validations:
+      required: true
+  - type: textarea
+    id: how-to-reproduce
+    attributes:
+      label: How to reproduce the bug
+      description: How did this occur, please add any config values used and provide a set of reliable steps if possible.
+      placeholder: When I do X I see Y.
+    validations:
+      required: true
+  - type: input
+    id: package-version
+    attributes:
+      label: Package Version
+      description: What version of our Package are you running? Please be as specific as possible
+      placeholder: 2.0.0
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP Version
+      description: What version of PHP are you running? Please be as specific as possible
+      placeholder: 8.2.0
+    validations:
+      required: true
+  - type: input
+    id: laravel-version
+    attributes:
+      label: Laravel Version
+      description: What version of Laravel are you running? Please be as specific as possible
+      placeholder: 9.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: operating-systems
+    attributes:
+      label: Which operating systems does with happen with?
+      description: You may select more than one.
+      multiple: true
+      options:
+        - macOS
+        - Windows
+        - Linux
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Use this field to provide any other notes that you feel might be relevant to the issue.
+    validations:
+      required: false
+</file>
+
+<file path=".github/ISSUE_TEMPLATE/config.yaml">
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/tomatophp/filament-language-switcher/discussions/new?category=q-a
+    about: Ask the community for help
+  - name: Request a feature
+    url: https://github.com/tomatophp/filament-language-switcher/discussions/new?category=ideas
+    about: Share ideas for new features
+  - name: Report a security issue
+    url: https://github.com/tomatophp/filament-language-switcher/security/policy
+    about: Learn how to notify us for sensitive bugs
+</file>
+
+<file path=".github/workflows/fix-php-code-styling.yml">
+name: 'PHP Code Styling'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.php'
+
+permissions:
+  contents: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Fix PHP code style issues
+        uses: aglipanci/laravel-pint-action@v2
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Format Code"
+          commit_user_name: 'GitHub Actions'
+</file>
+
+<file path=".github/CONTRIBUTING.md">
+# Contributing
+
+Contributions are **welcome** and will be fully **credited**.
+
+Please read and understand the contribution guide before creating an issue or pull request.
+
+## Etiquette
+
+This project is open source, and as such, the maintainers give their free time to build and maintain the source code
+held within. They make the code freely available in the hope that it will be of use to other developers. It would be
+extremely unfair for them to suffer abuse or anger for their hard work.
+
+Please be considerate towards maintainers when raising issues or presenting pull requests. Let's show the
+world that developers are civilized and selfless people.
+
+It's the duty of the maintainer to ensure that all submissions to the project are of sufficient
+quality to benefit the project. Many developers have different skills, strengths, and weaknesses. Respect the maintainer's decision, and do not be upset or abusive if your submission is not used.
+
+## Viability
+
+When requesting or submitting new features, first consider whether it might be useful to others. Open
+source projects are used by many developers, who may have entirely different needs to your own. Think about
+whether or not your feature is likely to be used by other users of the project.
+
+## Procedure
+
+Before filing an issue:
+
+- Attempt to replicate the problem, to ensure that it wasn't a coincidental incident.
+- Check to make sure your feature suggestion isn't already present within the project.
+- Check the pull requests tab to ensure that the bug doesn't have a fix in progress.
+- Check the pull requests tab to ensure that the feature isn't already in progress.
+
+Before submitting a pull request:
+
+- Check the codebase to ensure that your feature doesn't already exist.
+- Check the pull requests to ensure that another person hasn't already submitted the feature or fix.
+
+## Requirements
+
+If the project maintainer has any additional requirements, you will find them listed here.
+
+- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](https://pear.php.net/package/PHP_CodeSniffer).
+
+- **Add tests!** - Your patch won't be accepted if it doesn't have tests.
+
+- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
+
+- **Consider our release cycle** - We try to follow [SemVer v2.0.0](https://semver.org/). Randomly breaking public APIs is not an option.
+
+- **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
+
+- **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](https://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
+
+**Happy coding**!
+</file>
+
+<file path=".github/dependabot.yml">
+# Please see the documentation for all configuration options:
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+</file>
+
+<file path=".github/FUNDING.yml">
+github: [3x1io]
+</file>
+
+<file path=".github/SECURITY.md">
+# Security Policy
+
+If you discover any security related issues, please email info@3x1.io instead of using the issue tracker.
+</file>
+
+<file path="routes/web.php">
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/languages/switcher', [\TomatoPHP\FilamentLanguageSwitcher\Http\Controllers\LanguageController::class, 'index'])
+    ->name('languages.switcher')
+    ->middleware(config('filament-language-switcher.language_switcher_middlewares'));
+</file>
+
+<file path="src/Console/FilamentLanguageSwitcherInstall.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Console;
+
+use Illuminate\Console\Command;
+use TomatoPHP\ConsoleHelpers\Traits\RunCommand;
+
+class FilamentLanguageSwitcherInstall extends Command
+{
+    use RunCommand;
+
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $name = 'filament-language-switcher:install';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'install package and publish assets';
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        $this->info('Publish Vendor Assets');
+        $this->artisanCommand(['migrate']);
+        $this->artisanCommand(['filament:optimize']);
+        $this->info('Filament Language Switcher installed successfully.');
+    }
+}
+</file>
+
+<file path="src/Http/Middleware/LanguageMiddleware.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class LanguageMiddleware
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     */
+    public function handle(Request $request, Closure $next)
+    {
+        if ($request->user()) {
+            if (! empty($request->user()->lang)) {
+                app()->setLocale($request->user()->lang);
+            } else {
+                app()->setLocale('en');
+            }
+        }
+
+        return $next($request);
+    }
+}
+</file>
+
+<file path="src/Traits/InteractsWithLanguages.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Traits;
+
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+
+trait InteractsWithLanguages
+{
+    public function lang(): MorphOne
+    {
+        return $this->morphOne('TomatoPHP\FilamentLanguageSwitcher\Models\UserLanguage', 'model');
+    }
+
+    public function getLangAttribute()
+    {
+        return $this->lang()->first()?->lang ?? 'en';
+    }
+}
+</file>
+
+<file path="src/FilamentLanguageSwitcherPlugin.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher;
+
+use Filament\Contracts\Plugin;
+use Filament\Panel;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
+use TomatoPHP\FilamentLanguageSwitcher\Http\Middleware\LanguageMiddleware;
+
+class FilamentLanguageSwitcherPlugin implements Plugin
+{
+    public function getId(): string
+    {
+        return 'filament-language-switcher';
+    }
+
+    public function register(Panel $panel): void
+    {
+        $panel->renderHook(
+            config('filament-language-switcher.language_switcher_render_hook') ?: PanelsRenderHook::USER_MENU_BEFORE,
+            fn (): View => $this->getLanguageSwitcherView()
+        );
+
+        $panel->authMiddleware([
+            LanguageMiddleware::class,
+        ], true);
+    }
+
+    public function boot(Panel $panel): void
+    {
+        //
+    }
+
+    public static function make(): self
+    {
+        return new FilamentLanguageSwitcherPlugin;
+    }
+
+    /**
+     * Returns a View object that renders the language switcher component.
+     *
+     * @return View The View object that renders the language switcher component.
+     */
+    private function getLanguageSwitcherView(): View
+    {
+        $locales = config('filament-language-switcher.locals');
+        $currentLocale = app()->getLocale();
+        $currentLanguage = collect($locales)->firstWhere('code', $currentLocale);
+        $otherLanguages = $locales;
+        $showFlags = config('filament-language-switcher.show_flags');
+
+        return view('filament-language-switcher::language-switcher', compact(
+            'otherLanguages',
+            'currentLanguage',
+            'showFlags',
+        ));
+    }
+}
+</file>
+
+<file path="tests/database/factories/UserFactory.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Tests\Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use TomatoPHP\FilamentLanguageSwitcher\Tests\Models\User;
+
+class UserFactory extends Factory
+{
+    protected $model = User::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+        ];
+    }
+}
+</file>
+
+<file path="tests/src/Models/User.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Tests\Models;
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use TomatoPHP\FilamentLanguageSwitcher\Tests\Database\Factories\UserFactory;
+use TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
+
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+{
+    use HasFactory;
+    use InteractsWithLanguages;
+    use Notifiable;
+
+    protected $guarded = [];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
+
+    protected static function newFactory(): UserFactory
+    {
+        return UserFactory::new();
+    }
+}
+</file>
+
+<file path="tests/src/AdminPanelProvider.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Tests;
+
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Pages;
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\Support\Colors\Color;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
+
+class AdminPanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            ->default()
+            ->id('test')
+            ->path('test')
+            ->login()
+            ->colors([
+                'primary' => Color::Amber,
+            ])
+            ->pages([
+                Pages\Dashboard::class,
+            ])
+            ->plugin(
+                FilamentLanguageSwitcherPlugin::make()
+            )
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+            ])
+            ->authMiddleware([
+                Authenticate::class,
+            ]);
+    }
+}
+</file>
+
+<file path="tests/src/DebugTest.php">
+<?php
+
+it('will not use debugging functions', function () {
+    expect(['dd', 'dump', 'ray'])->each->not->toBeUsed();
+});
+</file>
+
+<file path="tests/src/InstallCommandTest.php">
+<?php
+
+use Illuminate\Support\Facades\Artisan;
+
+it('check install command', function () {
+    Artisan::call('filament-language-switcher:install');
+
+    $schema = \Illuminate\Support\Facades\Schema::hasTable('user_languages');
+
+    expect($schema)->toBeTrue();
+});
+</file>
+
+<file path="tests/src/PluginTest.php">
+<?php
+
+use Filament\Facades\Filament;
+use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
+
+it('registers plugin', function () {
+    $panel = Filament::getCurrentPanel();
+
+    $panel->plugins([
+        FilamentLanguageSwitcherPlugin::make(),
+    ]);
+
+    expect($panel->getPlugin('filament-language-switcher'))
+        ->not()
+        ->toThrow(Exception::class);
+});
+</file>
+
+<file path="tests/Pest.php">
+<?php
+
+use TomatoPHP\FilamentLanguageSwitcher\Tests\TestCase;
+
+uses(TestCase::class)->in(__DIR__);
+</file>
+
+<file path=".gitignore">
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+.DS_Store
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+/.zed
+</file>
+
+<file path="CHANGELOG.md">
+# V1.0.0
+
+First release of the package
+</file>
+
+<file path="LICENSE.md">
+The MIT License (MIT)
+
+Copyright (c)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</file>
+
+<file path="phpunit.xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         backupGlobals="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
+         cacheDirectory=".phpunit.cache"
+         backupStaticProperties="false"
+>
+    <testsuites>
+        <testsuite name="Tests">
+            <directory suffix=".php">./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="self-testing"/>
+        <env name="APP_KEY" value="base64:yk+bUVuZa1p86Dqjk9OjVK2R1pm6XHxC6xEKFq8utH0="/>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value="/vendor/tomatophp/filament-language-switcher/tests/database/database.sqlite"/>
+    </php>
+</phpunit>
+</file>
+
+<file path="SECURITY.md">
+# Security Policy
+
+If you discover any security related issues, please email info@3x1.io instead of using the issue tracker.
+</file>
+
+<file path="testbench.yaml">
+providers:
+  - BladeUI\Icons\BladeIconsServiceProvider
+  - BladeUI\Heroicons\BladeHeroiconsServiceProvider
+  - Livewire\LivewireServiceProvider
+  - Filament\Actions\ActionsServiceProvider
+  - Filament\FilamentServiceProvider
+  - Filament\Forms\FormsServiceProvider
+  - Filament\Infolists\InfolistsServiceProvider
+  - Filament\Notifications\NotificationsServiceProvider
+  - Filament\Support\SupportServiceProvider
+  - Filament\Schemas\SchemasServiceProvider
+  - Filament\Tables\TablesServiceProvider
+  - Filament\Widgets\WidgetsServiceProvider
+  - RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider
+  - TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherServiceProvider
+  - TomatoPHP\FilamentLanguageSwitcher\Tests\AdminPanelProvider
+workbench:
+  welcome: true
+  install: true
+  start: /
+  guard: testing
+  discovers:
+    web: true
+    api: false
+    commands: false
+    views: true
+</file>
+
+<file path="resources/lang/fr/translation.php">
+<?php
+
+return [
+    'change' => 'Changer la langue',
+    'lang' => [
+        'ar' => 'Arabe',
+        'en' => 'Anglais',
+        'pt_BR' => 'Portugais (Brésil)',
+        'my' => 'Birman',
+        'de' => 'Allemand',
+        'id' => 'Indonésien',
+        'it' => 'Italien',
+        'fr' => 'Français',
+        'es' => 'Espagnol',
+        'tr' => 'Turc',
+        'ru' => 'Russe',
+        'zh' => 'Chinois',
+        'ja' => 'Japonais',
+        'ko' => 'Coréen',
+        'hi' => 'Hindi',
+        'th' => 'Thaïlandais',
+        'vi' => 'Vietnamien',
+        'fa' => 'Persan',
+        'ur' => 'Ourdou',
+        'ms' => 'Malais',
+        'fil' => 'Philippin',
+        'bn' => 'Bengali',
+        'pt_PT' => 'Portugais - Portugal',
+        'pl' => 'Polonais',
+        'hu' => 'Hongrois',
+        'cs' => 'Tchèque',
+        'sk' => 'Slovaque',
+        'uk' => 'Ukrainien',
+        'el' => 'Grec',
+        'ro' => 'Roumain',
+        'hr' => 'Croate',
+        'sr' => 'Serbe',
+        'bg' => 'Bulgare',
+        'lt' => 'Lituanien',
+        'lv' => 'Letton',
+        'et' => 'Estonien',
+    ],
+    'notification' => 'La langue a été changée avec succès',
+];
+</file>
+
+<file path="resources/lang/hi/translation.php">
+<?php
+
+return [
+    'change' => 'भाषा बदलें',
+    'lang' => [
+        'ar' => 'अरबी',
+        'en' => 'अंग्रेज़ी',
+        'pt_BR' => 'पुर्तगाली (ब्राज़ील)',
+        'my' => 'बर्मी',
+        'de' => 'जर्मन',
+        'id' => 'इंडोनेशियाई',
+        'it' => 'इतालवी',
+        'fr' => 'फ्रेंच',
+        'es' => 'स्पेनिश',
+        'tr' => 'तुर्की',
+        'ru' => 'रूसी',
+        'zh' => 'चीनी',
+        'ja' => 'जापानी',
+        'ko' => 'कोरियाई',
+        'hi' => 'हिंदी',
+        'th' => 'थाई',
+        'vi' => 'वियतनामी',
+        'fa' => 'फारसी',
+        'ur' => 'उर्दू',
+        'ms' => 'मलय',
+        'fil' => 'फिलिपिनो',
+        'bn' => 'बंगाली',
+        'pt_PT' => 'पुर्तगाली - पुर्तगाल',
+        'pl' => 'पोलिश',
+        'hu' => 'हंगेरियन',
+        'cs' => 'चेक',
+        'sk' => 'स्लोवाक',
+        'uk' => 'यूक्रेनियाई',
+        'el' => 'यूनानी',
+        'ro' => 'रोमानियाई',
+        'hr' => 'क्रोएशियाई',
+        'sr' => 'सर्बियाई',
+        'bg' => 'बल्गेरियाई',
+        'lt' => 'लिथुआनियाई',
+        'lv' => 'लातवियाई',
+        'et' => 'एस्टोनियाई',
+    ],
+    'notification' => 'Language has been changed successfully',
+];
+</file>
+
+<file path="resources/lang/it/translation.php">
+<?php
+
+return [
+    'change' => 'Cambia lingua',
+    'lang' => [
+        'ar' => 'Arabic',
+        'en' => 'English',
+        'pt_BR' => 'Português (Brasil)',
+        'my' => 'Burmese',
+        'de' => 'German',
+        'id' => 'Indonesian',
+        'it' => 'Italiano',
+        'fr' => 'Francese',
+        'es' => 'Spagnolo',
+        'tr' => 'Turco',
+        'ru' => 'Russo',
+        'zh' => 'Cinese',
+        'ja' => 'Giapponese',
+        'ko' => 'Coreano',
+        'hi' => 'Hindi',
+        'th' => 'Tailandese',
+        'vi' => 'Vietnamita',
+        'fa' => 'Persiano',
+        'ur' => 'Urdu',
+        'ms' => 'Malese',
+        'fil' => 'Filippino',
+        'bn' => 'Bengalese',
+        'pt_PT' => 'Portoghese - Portogallo',
+        'pl' => 'Polacco',
+        'hu' => 'Ungherese',
+        'cs' => 'Ceco',
+        'sk' => 'Slovacco',
+        'uk' => 'Ucraino',
+        'el' => 'Greco',
+        'ro' => 'Rumeno',
+        'hr' => 'Croato',
+        'sr' => 'Serbo',
+        'bg' => 'Bulgaro',
+        'lt' => 'Lituano',
+        'lv' => 'Lettone',
+        'et' => 'Estone',
+    ],
+    'notification' => 'Lingua cambiata con successo',
+];
+</file>
+
+<file path="resources/lang/ja/translation.php">
+<?php
+
+return [
+    'change' => '更改语言',
+    'lang' => [
+        'ar' => '阿拉伯语',
+        'en' => '英语',
+        'pt_BR' => '葡萄牙语（巴西）',
+        'my' => '缅甸语',
+        'de' => '德语',
+        'id' => '印尼语',
+        'it' => '意大利语',
+        'fr' => '法语',
+        'es' => '西班牙语',
+        'tr' => '土耳其语',
+        'ru' => '俄语',
+        'zh' => '中文',
+        'ja' => '日语',
+        'ko' => '韩语',
+        'hi' => '印地语',
+        'th' => '泰语',
+        'vi' => '越南语',
+        'fa' => '波斯语',
+        'ur' => '乌尔都语',
+        'ms' => '马来语',
+        'fil' => '菲律宾语',
+        'bn' => '孟加拉语',
+        'pt_PT' => '葡萄牙语 - 葡萄牙',
+        'pl' => '波兰语',
+        'hu' => '匈牙利语',
+        'cs' => '捷克语',
+        'sk' => '斯洛伐克语',
+        'uk' => '乌克兰语',
+        'el' => '希腊语',
+        'ro' => '罗马尼亚语',
+        'hr' => '克罗地亚语',
+        'sr' => '塞尔维亚语',
+        'bg' => '保加利亚语',
+        'lt' => '立陶宛语',
+        'lv' => '拉脱维亚语',
+        'et' => '爱沙尼亚语',
+    ],
+    'notification' => '语言已成功更改',
+];
+</file>
+
+<file path="resources/lang/ko/translation.php">
+<?php
+
+return [
+    // Translate to Korean
+    'change' => '언어 변경',
+    'lang' => [
+        'ar' => '아랍어',
+        'en' => '영어',
+        'pt_BR' => '포르투갈어 (브라질)',
+        'my' => '버마어',
+        'de' => '독일어',
+        'id' => '인도네시아어',
+        'it' => '이탈리아어',
+        'fr' => '프랑스어',
+        'es' => '스페인어',
+        'tr' => '터키어',
+        'ru' => '러시아어',
+        'zh' => '중국어',
+        'ja' => '일본어',
+        'ko' => '한국어',
+        'hi' => '힌디어',
+        'th' => '태국어',
+        'vi' => '베트남어',
+        'fa' => '페르시아어',
+        'ur' => '우르두어',
+        'ms' => '말레이어',
+        'fil' => '필리핀어',
+        'bn' => '벵골어',
+        'pt_PT' => '포르투갈어 - 포르투갈',
+        'pl' => '폴란드어',
+        'hu' => '헝가리어',
+        'cs' => '체코어',
+        'sk' => '슬로바키아어',
+        'uk' => '우크라이나어',
+        'el' => '그리스어',
+        'ro' => '루마니아어',
+        'hr' => '크로아티아어',
+        'sr' => '세르비아어',
+        'bg' => '불가리아어',
+        'lt' => '리투아니아어',
+        'lv' => '라트비아어',
+        'et' => '에스토니아어',
+    ],
+    'notification' => '언어가 성공적으로 변경되었습니다',
+];
+</file>
+
+<file path="resources/lang/pt_PT/translation.php">
+<?php
+
+return [
+    'change' => 'Alterar idioma',
+    'lang' => [
+        'ar' => 'Árabe',
+        'en' => 'Inglês',
+        'pt_BR' => 'Português (Brasil)',
+        'my' => 'Birmanês',
+        'de' => 'Alemão',
+        'id' => 'Indonésio',
+        'it' => 'Italiano',
+        'fr' => 'Francês',
+        'es' => 'Espanhol',
+        'tr' => 'Turco',
+        'ru' => 'Russo',
+        'zh' => 'Chinês',
+        'ja' => 'Japonês',
+        'ko' => 'Coreano',
+        'hi' => 'Hindi',
+        'th' => 'Tailandês',
+        'vi' => 'Vietnamita',
+        'fa' => 'Persa',
+        'ur' => 'Urdu',
+        'ms' => 'Malaio',
+        'fil' => 'Filipino',
+        'bn' => 'Bengali',
+        'pt_PT' => 'Português - Portugal',
+        'pl' => 'Polonês',
+        'hu' => 'Húngaro',
+        'cs' => 'Tcheco',
+        'sk' => 'Eslovaco',
+        'uk' => 'Ucraniano',
+        'el' => 'Grego',
+        'ro' => 'Romeno',
+        'hr' => 'Croata',
+        'sr' => 'Sérvio',
+        'bg' => 'Búlgaro',
+        'lt' => 'Lituano',
+        'lv' => 'Letão',
+        'et' => 'Estoniano',
+    ],
+    'notification' => 'Idioma alterado com sucesso',
+];
+</file>
+
+<file path="resources/lang/ru/translation.php">
+<?php
+
+return [
+    // Translate to Russian
+    'change' => 'Изменить язык',
+    'lang' => [
+        'ar' => 'Арабский',
+        'en' => 'Английский',
+        'pt_BR' => 'Португальский (Бразилия)',
+        'my' => 'Бирманский',
+        'de' => 'Немецкий',
+        'id' => 'Индонезийский',
+        'it' => 'Итальянский',
+        'fr' => 'Французский',
+        'es' => 'Испанский',
+        'tr' => 'Турецкий',
+        'ru' => 'Русский',
+        'zh' => 'Китайский',
+        'ja' => 'Японский',
+        'ko' => 'Корейский',
+        'hi' => 'Хинди',
+        'th' => 'Тайский',
+        'vi' => 'Вьетнамский',
+        'fa' => 'Персидский',
+        'ur' => 'Урду',
+        'ms' => 'Малайский',
+        'fil' => 'Филиппинский',
+        'bn' => 'Бенгальский',
+        'pt_PT' => 'Португальский - Португалия',
+        'pl' => 'Польский',
+        'hu' => 'Венгерский',
+        'cs' => 'Чешский',
+        'sk' => 'Словацкий',
+        'uk' => 'Украинский',
+        'el' => 'Греческий',
+        'ro' => 'Румынский',
+        'hr' => 'Хорватский',
+        'sr' => 'Сербский',
+        'bg' => 'Болгарский',
+        'lt' => 'Литовский',
+        'lv' => 'Латышский',
+        'et' => 'Эстонский',
+    ],
+    'notification' => 'Язык успешно изменен',
+];
+</file>
+
+<file path="resources/lang/tr/translation.php">
+<?php
+
+return [
+    'change' => 'Dil Değiştir',
+    'lang' => [
+        'ar' => 'Arapça',
+        'en' => 'İngilizce',
+        'pt_BR' => 'Portekizce (Brezilya)',
+        'my' => 'Burmaca',
+        'de' => 'Almanca',
+        'id' => 'Endonezce',
+        'it' => 'İtalyanca',
+        'fr' => 'Fransızca',
+        'es' => 'İspanyolca',
+        'tr' => 'Türkçe',
+        'ru' => 'Rusça',
+        'zh' => 'Çince',
+        'ja' => 'Japonca',
+        'ko' => 'Korece',
+        'hi' => 'Hintçe',
+        'th' => 'Tayca',
+        'vi' => 'Vietnamca',
+        'fa' => 'Farsça',
+        'ur' => 'Urduca',
+        'ms' => 'Malayca',
+        'fil' => 'Filipince',
+        'bn' => 'Bengalce',
+        'pt_PT' => 'Portekizce - Portekiz',
+        'pl' => 'Lehçe',
+        'hu' => 'Macarca',
+        'cs' => 'Çekçe',
+        'sk' => 'Slovakça',
+        'uk' => 'Ukraynaca',
+        'el' => 'Yunanca',
+        'ro' => 'Romence',
+        'hr' => 'Hırvatça',
+        'sr' => 'Sırpça',
+        'bg' => 'Bulgarca',
+        'lt' => 'Litvanca',
+        'lv' => 'Letonca',
+        'et' => 'Estonyaca',
+    ],
+    'notification' => 'Dil başarıyla değiştirildi',
+];
+</file>
+
+<file path="resources/lang/zh/translation.php">
+<?php
+
+return [
+    // Translate to Chinese
+    'change' => '更改语言',
+    'lang' => [
+        'ar' => '阿拉伯语',
+        'en' => '英语',
+        'pt_BR' => '葡萄牙语（巴西）',
+        'my' => '缅甸语',
+        'de' => '德语',
+        'id' => '印尼语',
+        'it' => '意大利语',
+        'fr' => '法语',
+        'es' => '西班牙语',
+        'tr' => '土耳其语',
+        'ru' => '俄语',
+        'zh' => '中文',
+        'ja' => '日语',
+        'ko' => '韩语',
+        'hi' => '印地语',
+        'th' => '泰语',
+        'vi' => '越南语',
+        'fa' => '波斯语',
+        'ur' => '乌尔都语',
+        'ms' => '马来语',
+        'fil' => '菲律宾语',
+        'bn' => '孟加拉语',
+        'pt_PT' => '葡萄牙语 - 葡萄牙',
+        'pl' => '波兰语',
+        'hu' => '匈牙利语',
+        'cs' => '捷克语',
+        'sk' => '斯洛伐克语',
+        'uk' => '乌克兰语',
+        'el' => '希腊语',
+        'ro' => '罗马尼亚语',
+        'hr' => '克罗地亚语',
+        'sr' => '塞尔维亚语',
+        'bg' => '保加利亚语',
+        'lt' => '立陶宛语',
+        'lv' => '拉脱维亚语',
+        'et' => '爱沙尼亚语',
+    ],
+    'notification' => 'Language has been changed successfully',
+];
+</file>
+
+<file path="src/FilamentLanguageSwitcherServiceProvider.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher;
+
+use Illuminate\Support\ServiceProvider;
+
+class FilamentLanguageSwitcherServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        $this->commands([
+            Console\FilamentLanguageSwitcherInstall::class,
+        ]);
+
+        // Register Config file
+        $this->mergeConfigFrom(__DIR__.'/../config/filament-language-switcher.php', 'filament-language-switcher');
+
+        // Publish Config
+        $this->publishes([
+            __DIR__.'/../config/filament-language-switcher.php' => config_path('filament-language-switcher.php'),
+        ], 'filament-language-switcher-config');
+
+        // Register Migrations
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        // Publish Migrations
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'filament-language-switcher-migrations');
+
+        // Register views
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'filament-language-switcher');
+
+        // Publish Views
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/filament-language-switcher'),
+        ], 'filament-language-switcher-views');
+
+        // Register Langs
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'filament-language-switcher');
+
+        // Publish Lang
+        $this->publishes([
+            __DIR__.'/../resources/lang' => base_path('lang/vendor/filament-language-switcher'),
+        ], 'filament-language-switcher-lang');
+
+        // Register Routes
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+    }
+
+    public function boot(): void
+    {
+        // you boot methods here
+    }
+}
+</file>
+
+<file path="3x1io-tomato-language-switcher.md">
+---
+name: Language Switcher
+slug: 3x1io-tomato-language-switcher
+author_slug: 3x1io
+categories: [developer-tools]
+description: Switch between languages on your app using user base column on database
+discord_url:
+docs_url: https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/README.md
+github_repository: tomatophp/filament-language-switcher
+has_dark_theme: true
+has_translations: true
+versions: [3]
+publish_date: 2024-10-23
+---
+</file>
+
+<file path=".github/workflows/dependabot-auto-merge.yml">
+name: dependabot-auto-merge
+on: pull_request_target
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2.4.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Auto-merge Dependabot PRs for semver-minor updates
+        if: ${{steps.metadata.outputs.update-type == 'version-update:semver-minor'}}
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Auto-merge Dependabot PRs for semver-patch updates
+        if: ${{steps.metadata.outputs.update-type == 'version-update:semver-patch'}}
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+</file>
+
+<file path="database/migrations/2024_10_23_010712_create_user_languages_table.php">
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        if (config('filament-language-switcher.allow_user_lang_table')) {
+            Schema::create('user_languages', function (Blueprint $table) {
+                $table->id();
+                $table->string('model_id');
+                $table->string('model_type');
+                $table->string('lang')->default('en')->nullable();
+                $table->timestamps();
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('user_languages');
+    }
+};
+</file>
+
+<file path="resources/views/language-switcher.blade.php">
+@php
+if(!function_exists('try_svg')) {
+    function try_svg($name, $classes) {
+        try {
+            return svg($name, $classes);
+        }
+        catch(\Exception $e) {
+            return '❓';
+        }
+    }
+}
+@endphp
+
+
+<x-filament::dropdown >
+    <x-slot name="trigger">
+        <x-filament::avatar x-tooltip="{
+            content: '{{ trans('filament-language-switcher::translation.change') }}',
+            theme: $store.theme,
+        }" id="filament-language-switcher" size="sm" src="https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/{{config('filament-language-switcher.locals')[app()->getLocale()]['flag']?:null}}.svg" />
+    </x-slot>
+
+    @foreach ($otherLanguages as $key=>$language)
+        @php $isCurrent = app()->getLocale() === $key; @endphp
+            <x-filament::dropdown.list.item
+                :image="'https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/'.$language['flag'].'.svg'"
+                tag="a"
+                :href="route('languages.switcher', parameters: ['lang' => $key, 'model' => get_class(auth()->user()), 'model_id' => \Filament\Facades\Filament::auth()->user()->id])"
+            >
+                    <span @class(['font-semibold' => $isCurrent])>{{ trans('filament-language-switcher::translation.lang.'.$key) }}</span>
+
+            </x-filament::dropdown.list.item>
+    @endforeach
+</x-filament::dropdown>
+</file>
+
+<file path="src/Models/UserLanguage.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+
+class UserLanguage extends Model
+{
+    protected $fillable = [
+        'model_id',
+        'model_type',
+        'lang',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    public function model(): MorphTo
+    {
+        return $this->morphTo();
+    }
+}
+</file>
+
+<file path="module.json">
+{
+    "name": "FilamentLanguageSwitcher",
+    "alias": "filament-language-switcher",
+    "description": {
+        "ar": "Switch between lanuages on your app using user base column on database",
+        "en": "Switch between lanuages on your app using user base column on database",
+        "gr": "Switch between lanuages on your app using user base column on database",
+        "sp": "Switch between lanuages on your app using user base column on database"
+    },
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "TomatoPHP\\FilamentLanguageSwitcher\\FilamentLanguageSwitcherServiceProvider"
+    ],
+    "files": [],
+    "title": {
+        "ar": "Filament language switcher",
+        "en": "Filament language switcher",
+        "gr": "Filament language switcher",
+        "sp": "Filament language switcher"
+    },
+    "color": "#cc1448",
+    "icon": "heroicon-c-users",
+    "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/3x1io-tomato-language-switcher.jpg",
+    "type": "plugin",
+    "version": "v1.0.6",
+    "github" : "https://github.com/tomatophp/filament-language-switcher",
+    "docs" : "https://github.com/tomatophp/filament-language-switcher"
+}
+</file>
+
+<file path="resources/lang/ar/translation.php">
+<?php
+
+return [
+    'change' => 'تغيير اللغة',
+    'lang' => [
+        'ar' => 'العربية',
+        'en' => 'الانجليزية',
+        'pt_BR' => 'البرتغالية - البرازيل',
+        'my' => 'البورمية',
+        'nl' => 'الهولندية',
+        'de' => 'الألمانية',
+        'id' => 'الإندونيسية',
+        'it' => 'الإيطالية',
+        'fr' => 'الفرنسية',
+        'es' => 'الإسبانية',
+        'tr' => 'التركية',
+        'ru' => 'الروسية',
+        'zh' => 'الصينية',
+        'ja' => 'اليابانية',
+        'ko' => 'الكورية',
+        'hi' => 'الهندية',
+        'th' => 'التايلاندية',
+        'vi' => 'الفيتنامية',
+        'fa' => 'الفارسية',
+        'ur' => 'الأوردية',
+        'ms' => 'الماليزية',
+        'fil' => 'الفلبينية',
+        'bn' => 'البنغالية',
+        'pt_PT' => 'البرتغالية - البرتغال',
+        'pl' => 'البولندية',
+        'hu' => 'المجرية',
+        'cs' => 'التشيكية',
+        'sk' => 'السلوفاكية',
+        'uk' => 'الأوكرانية',
+        'el' => 'اليونانية',
+        'ro' => 'الرومانية',
+        'hr' => 'الكرواتية',
+        'sr' => 'الصربية',
+        'bg' => 'البلغارية',
+        'lt' => 'الليتوانية',
+        'lv' => 'اللاتفية',
+        'et' => 'الإستونية',
+    ],
+    'notification' => 'تم تغيير اللغة بنجاح',
+];
+</file>
+
+<file path="resources/lang/de/translation.php">
+<?php
+
+return [
+    'change' => 'Sprache ändern',
+    'lang' => [
+        'ar' => 'Arabisch',
+        'en' => 'Englisch',
+        'pt_BR' => 'Portugiesisch (Brasilien)',
+        'my' => 'Burmesisch',
+        'de' => 'Deutsch',
+        'id' => 'Indonesisch',
+        'it' => 'Italienisch',
+        'fr' => 'Französisch',
+        'es' => 'Spanisch',
+        'tr' => 'Türkisch',
+        'ru' => 'Russisch',
+        'zh' => 'Chinesisch',
+        'ja' => 'Japanisch',
+        'ko' => 'Koreanisch',
+        'hi' => 'Hindi',
+        'th' => 'Thailändisch',
+        'vi' => 'Vietnamesisch',
+        'fa' => 'Persisch',
+        'ur' => 'Urdu',
+        'ms' => 'Malaiisch',
+        'fil' => 'Filipino',
+        'bn' => 'Bengali',
+        'pt_PT' => 'Portugiesisch - Portugal',
+        'pl' => 'Polnisch',
+        'hu' => 'Ungarisch',
+        'cs' => 'Tschechisch',
+        'sk' => 'Slowakisch',
+        'uk' => 'Ukrainisch',
+        'el' => 'Griechisch',
+        'ro' => 'Rumänisch',
+        'hr' => 'Kroatisch',
+        'sr' => 'Serbisch',
+        'bg' => 'Bulgarisch',
+        'lt' => 'Litauisch',
+        'lv' => 'Lettisch',
+        'et' => 'Estnisch',
+    ],
+    'notification' => 'Sprache wurde erfolgreich geändert',
+
+];
+</file>
+
+<file path="resources/lang/en/translation.php">
+<?php
+
+return [
+    'change' => 'Change Language',
+    'lang' => [
+        'ar' => 'Arabic',
+        'en' => 'English',
+        'pt_BR' => 'Português (Brasil)',
+        'my' => 'Burmese',
+        'de' => 'German',
+        'id' => 'Indonesian',
+        'it' => 'Italian',
+        'fr' => 'French',
+        'es' => 'Spanish',
+        'tr' => 'Turkish',
+        'ru' => 'Russian',
+        'zh' => 'Chinese',
+        'ja' => 'Japanese',
+        'ko' => 'Korean',
+        'hi' => 'Hindi',
+        'th' => 'Thai',
+        'vi' => 'Vietnamese',
+        'fa' => 'Persian',
+        'ur' => 'Urdu',
+        'ms' => 'Malay',
+        'fil' => 'Filipino',
+        'bn' => 'Bengali',
+        'pt_PT' => 'Portuguese - Portugal',
+        'pl' => 'Polish',
+        'hu' => 'Hungarian',
+        'cs' => 'Czech',
+        'sk' => 'Slovak',
+        'uk' => 'Ukrainian',
+        'el' => 'Greek',
+        'ro' => 'Romanian',
+        'hr' => 'Croatian',
+        'sr' => 'Serbian',
+        'bg' => 'Bulgarian',
+        'lt' => 'Lithuanian',
+        'lv' => 'Latvian',
+        'et' => 'Estonian',
+    ],
+    'notification' => 'Language has been changed successfully',
+];
+</file>
+
+<file path="resources/lang/es/translation.php">
+<?php
+
+return [
+    'change' => 'Cambiar Idioma',
+    'lang' => [
+        'ar' => 'Árabe',
+        'en' => 'Inglés',
+        'pt_BR' => 'Portugués (Brasil)',
+        'my' => 'Birmano',
+        'de' => 'Alemán',
+        'id' => 'Indonesio',
+        'it' => 'Italiano',
+        'fr' => 'Francés',
+        'es' => 'Español',
+        'tr' => 'Turco',
+        'ru' => 'Ruso',
+        'zh' => 'Chino',
+        'ja' => 'Japonés',
+        'ko' => 'Coreano',
+        'hi' => 'Hindi',
+        'th' => 'Tailandés',
+        'vi' => 'Vietnamita',
+        'fa' => 'Persa',
+        'ur' => 'Urdu',
+        'ms' => 'Malayo',
+        'fil' => 'Filipino',
+        'bn' => 'Bengalí',
+        'pt_PT' => 'Portugués - Portugal',
+        'pl' => 'Polaco',
+        'hu' => 'Húngaro',
+        'cs' => 'Checo',
+        'sk' => 'Eslovaco',
+        'uk' => 'Ucraniano',
+        'el' => 'Griego',
+        'ro' => 'Rumano',
+        'hr' => 'Croata',
+        'sr' => 'Serbio',
+        'bg' => 'Búlgaro',
+        'lt' => 'Lituano',
+        'lv' => 'Letón',
+        'et' => 'Estonio',
+    ],
+    'notification' => 'El idioma ha sido cambiado exitosamente',
+];
+</file>
+
+<file path="resources/lang/id/translation.php">
+<?php
+
+return [
+    'change' => 'Ubah Bahasa',
+    'lang' => [
+        'ar' => 'Arab',
+        'en' => 'Inggris',
+        'pt_BR' => 'Portugis (Brazil)',
+        'my' => 'Burma',
+        'de' => 'Jerman',
+        'id' => 'Bahasa Indonesia',
+        'it' => 'Italia',
+        'fr' => 'Perancis',
+        'es' => 'Spanyol',
+        'tr' => 'Turki',
+        'ru' => 'Rusia',
+        'zh' => 'Cina',
+        'ja' => 'Jepang',
+        'ko' => 'Korea',
+        'hi' => 'Hindi',
+        'th' => 'Thai',
+        'vi' => 'Vietnam',
+        'fa' => 'Persia',
+        'ur' => 'Urdu',
+        'ms' => 'Melayu',
+        'fil' => 'Filipina',
+        'bn' => 'Bengali',
+        'pt_PT' => 'Portugis - Portugal',
+        'pl' => 'Polandia',
+        'hu' => 'Hungaria',
+        'cs' => 'Ceko',
+        'sk' => 'Slovakia',
+        'uk' => 'Ukraina',
+        'el' => 'Yunani',
+        'ro' => 'Rumania',
+        'hr' => 'Kroasia',
+        'sr' => 'Serbia',
+        'bg' => 'Bulgaria',
+        'lt' => 'Lituania',
+        'lv' => 'Latvia',
+        'et' => 'Estonia',
+    ],
+    'notification' => 'Bahasa telah berhasil diubah',
+];
+</file>
+
+<file path="resources/lang/my/translation.php">
+<?php
+
+return [
+    'change' => 'ဘာသာစကား ပြောင်းလဲ',
+    'lang' => [
+        'ar' => 'အာရဗီ',
+        'en' => 'အင်္ဂလိပ်',
+        'pt_BR' => 'ပို်တူဂီ (ဘရာဇီး)',
+        'my' => 'ဗမာ',
+        'de' => 'ဂျာမန်',
+        'id' => 'အင်ဒိုနီးရှား',
+        'it' => 'အီတလီ',
+        'fr' => 'ပြင်သစ်',
+        'es' => 'စပိန်',
+        'tr' => 'တူရကီ',
+        'ru' => 'ရုရှ',
+        'zh' => 'တရုတ်',
+        'ja' => 'ဂျပန်',
+        'ko' => 'ကိုရီးယား',
+        'hi' => 'ဟိန္ဒီ',
+        'th' => 'ထိုင်း',
+        'vi' => 'ဗီယက်နမ်',
+        'fa' => 'ပါရှန်',
+        'ur' => 'အူရဒီ',
+        'ms' => 'မလေး',
+        'fil' => 'ဖိလစ်ပိုင်',
+        'bn' => 'ဘင်္ဂလား',
+        'pt_PT' => 'ပိုတ်ဂီ (ပေါ်တော်ဂို)',
+        'pl' => 'ပိုလန်',
+        'hu' => 'ဟန်ဂေရီ',
+        'cs' => 'ချက်',
+        'sk' => 'စလိုဗီယန်',
+        'uk' => 'ယူကရိန်',
+        'el' => 'ဂရိ',
+        'ro' => 'ရိုမေးနီးယား',
+        'hr' => 'ခရိုအေးရှား',
+        'sr' => 'ဆားဘီးယား',
+        'bg' => 'ဘူဂေးရီးယား',
+        'lt' => 'လီသူဝန်း',
+        'lv' => 'လတ်ဗီးယား',
+        'et' => 'အက်စတိုး',
+    ],
+    'notification' => 'ဘာသာစကား အောင်မြင်စွာ ပြောင်းလဲပြီးပါပြီ',
+];
+</file>
+
+<file path="resources/lang/nl/translation.php">
+<?php
+
+return [
+    'change' => 'Taal wijzigen',
+    'lang' => [
+        'ar' => 'Arabisch',
+        'en' => 'Engels',
+        'pt_BR' => 'Portugees (Brazilië)',
+        'my' => 'Birmaans',
+        'de' => 'Duits',
+        'id' => 'Indonesisch',
+        'it' => 'Italiaans',
+        'fr' => 'Frans',
+        'es' => 'Spaans',
+        'tr' => 'Turks',
+        'ru' => 'Russisch',
+        'zh' => 'Chinees',
+        'ja' => 'Japans',
+        'ko' => 'Koreaans',
+        'hi' => 'Hindi',
+        'th' => 'Thais',
+        'vi' => 'Vietnamees',
+        'fa' => 'Perzisch',
+        'ur' => 'Urdu',
+        'ms' => 'Maleis',
+        'fil' => 'Filipijns',
+        'bn' => 'Bengaals',
+        'pt_PT' => 'Portugees - Portugal',
+        'pl' => 'Pools',
+        'hu' => 'Hongaars',
+        'cs' => 'Tsjechisch',
+        'sk' => 'Slowaaks',
+        'uk' => 'Oekraïens',
+        'el' => 'Grieks',
+        'ro' => 'Roemeens',
+        'hr' => 'Kroatisch',
+        'sr' => 'Servisch',
+        'bg' => 'Bulgaars',
+        'lt' => 'Litouws',
+        'lv' => 'Lets',
+        'et' => 'Ests',
+    ],
+    'notification' => 'Taal is succesvol gewijzigd',
+];
+</file>
+
+<file path="resources/lang/pt_BR/translation.php">
+<?php
+
+return [
+    'change' => 'Alterar Idioma',
+    'lang' => [
+        'ar' => 'Árabe',
+        'en' => 'Inglês',
+        'pt_BR' => 'Português (Brasil)',
+        'my' => 'Birmanês',
+        'de' => 'Alemão',
+        'id' => 'Indonésio',
+        'it' => 'Italiano',
+        'fr' => 'Francês',
+        'es' => 'Espanhol',
+        'tr' => 'Turco',
+        'ru' => 'Russo',
+        'zh' => 'Chinês',
+        'ja' => 'Japonês',
+        'ko' => 'Coreano',
+        'hi' => 'Hindi',
+        'th' => 'Tailandês',
+        'vi' => 'Vietnamita',
+        'fa' => 'Persa',
+        'ur' => 'Urdu',
+        'ms' => 'Malaio',
+        'fil' => 'Filipino',
+        'bn' => 'Bengali',
+        'pt_PT' => 'Português - Portugal',
+        'pl' => 'Polonês',
+        'hu' => 'Húngaro',
+        'cs' => 'Tcheco',
+        'sk' => 'Eslovaco',
+        'uk' => 'Ucraniano',
+        'el' => 'Grego',
+        'ro' => 'Romeno',
+        'hr' => 'Croata',
+        'sr' => 'Sérvio',
+        'bg' => 'Búlgaro',
+        'lt' => 'Lituano',
+        'lv' => 'Letão',
+        'et' => 'Estoniano',
+    ],
+    'notification' => 'Idioma alterado com sucesso',
+];
+</file>
+
+<file path="tests/src/TestCase.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Tests;
+
+use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
+use BladeUI\Icons\BladeIconsServiceProvider;
+use Filament\Actions\ActionsServiceProvider;
+use Filament\FilamentServiceProvider;
+use Filament\Forms\FormsServiceProvider;
+use Filament\Infolists\InfolistsServiceProvider;
+use Filament\Notifications\NotificationsServiceProvider;
+use Filament\Support\SupportServiceProvider;
+use Filament\Tables\TablesServiceProvider;
+use Filament\Widgets\WidgetsServiceProvider;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\LivewireServiceProvider;
+use Orchestra\Testbench\Attributes\WithEnv;
+use Orchestra\Testbench\Concerns\WithWorkbench;
+use Orchestra\Testbench\TestCase as BaseTestCase;
+use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
+use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherServiceProvider;
+
+#[WithEnv('DB_CONNECTION', 'testing')]
+abstract class TestCase extends BaseTestCase
+{
+    use RefreshDatabase;
+    use WithWorkbench;
+
+    protected function getPackageProviders($app): array
+    {
+        return [
+            ActionsServiceProvider::class,
+            BladeCaptureDirectiveServiceProvider::class,
+            BladeHeroiconsServiceProvider::class,
+            BladeIconsServiceProvider::class,
+            FilamentServiceProvider::class,
+            FormsServiceProvider::class,
+            InfolistsServiceProvider::class,
+            LivewireServiceProvider::class,
+            NotificationsServiceProvider::class,
+            SupportServiceProvider::class,
+            TablesServiceProvider::class,
+            WidgetsServiceProvider::class,
+            FilamentLanguageSwitcherServiceProvider::class,
+            AdminPanelProvider::class,
+        ];
+    }
+
+    protected function defineDatabaseMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+    }
+
+    public function getEnvironmentSetUp($app): void
+    {
+        $app['config']->set('database.default', 'testing');
+
+        $app['config']->set('view.paths', [
+            ...$app['config']->get('view.paths'),
+            __DIR__.'/../resources/views',
+        ]);
+    }
+}
+</file>
+
+<file path="src/Http/Controllers/LanguageController.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Http\Controllers;
+
+use Filament\Notifications\Notification;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
+use TomatoPHP\FilamentLanguageSwitcher\Models\UserLanguage;
+
+class LanguageController
+{
+    public function index(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'lang' => 'required|string',
+            'model' => 'required|string',
+            'model_id' => 'required',
+        ]);
+
+        if (Schema::hasColumn(app($request->get('model'))->getTable(), 'lang')) {
+            $model = app($request->get('model'))->find($request->get('model_id'));
+            $model->lang = $request->get('lang');
+            $model->save();
+        } else {
+            $lang = UserLanguage::query()
+                ->where('model_type', app($request->get('model'))->getMorphClass())
+                ->where('model_id', $request->get('model_id'))
+                ->first();
+
+            if ($lang) {
+                $lang->lang = $request->get('lang');
+                $lang->save();
+            } else {
+                UserLanguage::query()->create([
+                    'model_type' => app($request->get('model'))->getMorphClass(),
+                    'model_id' => $request->get('model_id'),
+                    'lang' => $request->get('lang'),
+                ]);
+            }
+        }
+
+        Notification::make()
+            ->title(trans('filament-language-switcher::translation.notification', locale: $request->get('lang')))
+            ->icon('heroicon-o-check-circle')
+            ->iconColor('success')
+            ->send();
+
+        if (config('filament-language-switcher.redirect') === 'next') {
+            return back();
+        }
+
+        return redirect()->to(config('filament-language-switcher.redirect'));
+    }
+}
+</file>
+
+<file path=".github/workflows/tests.yml">
+name: "Tests"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.php'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - master
+    paths:
+      - '**.php'
+      - '.github/workflows/tests.yml'
+      - 'phpunit.xml.dist'
+      - 'composer.json'
+      - 'composer.lock'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.4, 8.3, 8.2]
+        laravel: [12.*]
+        stability: [prefer-stable]
+        include:
+          - laravel: 12.*
+            testbench: 10.*
+            carbon: 3.*
+            collision: 8.*
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Install Dependencies
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install Dependencies
+        run: |
+          composer config minimum-stability beta
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" "nunomaduro/collision:${{ matrix.collision }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer db
+
+      - name: Execute tests
+        run: vendor/bin/pest
+</file>
+
+<file path="config/filament-language-switcher.php">
+<?php
+
+use Filament\View\PanelsRenderHook;
+
+return [
+    /*
+     |--------------------------------------------------------------------------
+     | Locals
+     |--------------------------------------------------------------------------
+     |
+     | add the locals that will be show on the languages selector
+     |
+     */
+    'locals' => [
+        'en' => [
+            'label' => 'English',
+            'flag' => 'gb',
+        ],
+        'ar' => [
+            'label' => 'Arabic',
+            'flag' => 'sa',
+        ],
+        'fr' => [
+            'label' => 'French',
+            'flag' => 'fr',
+        ],
+        'it' => [
+            'label' => 'Italian',
+            'flag' => 'it',
+        ],
+        'es' => [
+            'label' => 'Spanish',
+            'flag' => 'es',
+        ],
+        'de' => [
+            'label' => 'German',
+            'flag' => 'de',
+        ],
+        'pt_BR' => [
+            'label' => 'Português (Brasil)',
+            'flag' => 'br',
+        ],
+        'pt_PT' => [
+            'label' => 'Portuguese (Portugal)',
+            'flag' => 'pt',
+        ],
+        'zh' => [
+            'label' => 'Chinese',
+            'flag' => 'cn',
+        ],
+        'ko' => [
+            'label' => 'Korean',
+            'flag' => 'kr',
+        ],
+        'ja' => [
+            'label' => 'Japanese',
+            'flag' => 'jp',
+        ],
+        'hi' => [
+            'label' => 'Hindi',
+            'flag' => 'in',
+        ],
+        'ru' => [
+            'label' => 'Russian',
+            'flag' => 'ru',
+        ],
+        'tr' => [
+            'label' => 'Turkish',
+            'flag' => 'tr',
+        ],
+        'my' => [
+            'label' => 'Burmese',
+            'flag' => 'mm',
+        ],
+        'id' => [
+            'label' => 'Indonesian',
+            'flag' => 'id',
+        ],
+    ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Show Flags
+     |--------------------------------------------------------------------------
+     |
+     | Show flags on the language selector
+     |
+     */
+    'show_flags' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    |
+    | Determines the render hook for the language switcher.
+    | Available render hooks: https://filamentphp.com/docs/3.x/support/render-hooks#available-render-hooks
+    |
+    */
+
+    'language_switcher_render_hook' => PanelsRenderHook::USER_MENU_BEFORE,
+
+    /*
+     |--------------------------------------------------------------------------
+     |
+     | Language Switch Middlewares
+     |
+     */
+    'language_switcher_middlewares' => [
+        'web',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redirect
+    |--------------------------------------------------------------------------
+    |
+    | set the redirect path when change the language between selected path or next request
+    |
+    */
+    'redirect' => 'next',
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Language Table
+    |--------------------------------------------------------------------------
+    |
+    | set the user language table to store the user language, if your model don't have lang field
+    |
+    */
+    'allow_user_lang_table' => true,
+];
+</file>
+
+<file path="tests/src/LanguageSwitcherTest.php">
+<?php
+
+use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\Str;
+use Illuminate\Support\ViewErrorBag;
+use TomatoPHP\FilamentLanguageSwitcher\Tests\Models\User;
+
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
+
+beforeEach(function () {
+    $user = User::factory()->create();
+    actingAs($user);
+});
+
+it('has a language switcher', function () {
+    $errors = new \Illuminate\Support\ViewErrorBag;
+    $errors->put('default', new \Illuminate\Support\MessageBag);
+    session()->put('errors', $errors);
+    // Render the view
+    // Perform a GET request to fetch the HTML content of the page
+    $response = get(\Filament\Pages\Dashboard::getUrl()); // replace with your route
+
+    // Ensure the response status is OK (200)
+    $response->assertStatus(200);
+
+    // Get the HTML content of the response
+    $html = $response->getContent();
+
+    // Use Laravel's native Crawler (based on Symfony's DomCrawler)
+    $crawler = Str::of($html);
+
+    // Check if the element with the specific ID exists
+    $elementExists = $crawler->contains('id="filament-language-switcher"'); // replace 'your-id-here' with the actual id you're checking
+
+    // Assert that the element exists
+    expect($elementExists)->toBeTrue();
+});
+
+it('can switch language to en', function () {
+    $response = get(route('languages.switcher', [
+        'model' => get_class(auth()->user()),
+        'model_id' => auth()->user()->id,
+        'lang' => 'en',
+    ]));
+
+    // Ensure the response status is OK (200)
+    $response->assertStatus(302);
+
+    $currentLang = auth()->user()->lang == 'en';
+
+    expect($currentLang)->toBeTrue();
+});
+
+it('can switch language to ar', function () {
+    $response = get(route('languages.switcher', [
+        'model' => get_class(auth('web')->user()),
+        'model_id' => auth()->user()->id,
+        'lang' => 'ar',
+    ]));
+
+    // Ensure the response status is OK (200)
+    $response->assertStatus(302);
+
+    $currentLang = auth('web')->user()->lang == 'ar';
+
+    expect($currentLang)->toBeTrue();
+});
+
+it('sends a notification in the newly selected language', function (string $locale) {
+    $response = get(route('languages.switcher', [
+        'model' => get_class(auth('web')->user()),
+        'model_id' => auth()->user()->id,
+        'lang' => $locale,
+    ]));
+
+    // Ensure the response status is OK (200)
+    $response->assertStatus(302);
+
+    Notification::assertNotified(
+        Notification::make()
+            ->title(trans('filament-language-switcher::translation.notification', locale: $locale))
+            ->icon('heroicon-o-check-circle')
+            ->iconColor('success')
+    );
+})->with(['locale' => ['en', 'nl', 'ar', 'de']]);
+</file>
+
+<file path="README.md">
+![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/3x1io-tomato-language-switcher.jpg)
+
+# Filament Language Switcher
+
+[![Dependabot Updates](https://github.com/tomatophp/filament-language-switcher/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/tomatophp/filament-language-switcher/actions/workflows/dependabot/dependabot-updates)
+[![PHP Code Styling](https://github.com/tomatophp/filament-language-switcher/actions/workflows/fix-php-code-styling.yml/badge.svg)](https://github.com/tomatophp/filament-language-switcher/actions/workflows/fix-php-code-styling.yml)
+[![Tests](https://github.com/tomatophp/filament-language-switcher/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/tomatophp/filament-language-switcher/actions/workflows/tests.yml)
+[![Latest Stable Version](https://poser.pugx.org/tomatophp/filament-language-switcher/version.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
+[![License](https://poser.pugx.org/tomatophp/filament-language-switcher/license.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
+[![Downloads](https://poser.pugx.org/tomatophp/filament-language-switcher/d/total.svg)](https://packagist.org/packages/tomatophp/filament-language-switcher)
+
+Switch between languages on your app using user base column on database
+
+## Screenshots
+
+![Switcher](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/switcher.png)
+![Dropdown Ar](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-ar.png)
+![Dropdown En](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-en.png)
+
+## Installation
+
+```bash
+composer require tomatophp/filament-language-switcher
+```
+after install your package please run this command
+
+```bash
+php artisan filament-language-switcher:install
+```
+
+finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
+
+```php
+->plugin(\TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin::make())
+```
+
+now on your `User.php` model or any user model add this trait
+
+```php
+use \TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
+```
+
+now you must see the switcher and you can change language as you like
+
+## Publish Assets
+
+you can publish config file by use this command
+
+```bash
+php artisan vendor:publish --tag="filament-language-switcher-config"
+```
+
+you can publish views file by use this command
+
+```bash
+php artisan vendor:publish --tag="filament-language-switcher-views"
+```
+
+you can publish languages file by use this command
+
+```bash
+php artisan vendor:publish --tag="filament-language-switcher-lang"
+```
+
+you can publish migrations file by use this command
+
+```bash
+php artisan vendor:publish --tag="filament-language-switcher-migrations"
+```
+
+## Testing
+
+if you like to run `PEST` testing just use this command
+
+```bash
+composer test
+```
+
+## Code Style
+
+if you like to fix the code style just use this command
+
+```bash
+composer format
+```
+
+## PHPStan
+
+if you like to check the code by `PHPStan` just use this command
+
+```bash
+composer analyse
+```
+
+## Other Filament Packages
+
+Checkout our [Awesome TomatoPHP](https://github.com/tomatophp/awesome)
+</file>
+
+<file path="composer.json">
+{
+    "name": "tomatophp/filament-language-switcher",
+    "type": "library",
+    "description": "Switch between languages on your app using user base column on database",
+    "keywords": [
+        "php",
+        "laravel",
+        "language-switch",
+        "filament-plugin",
+        "tomatophp"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TomatoPHP\\FilamentLanguageSwitcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TomatoPHP\\FilamentLanguageSwitcher\\Tests\\": "tests/src/",
+            "TomatoPHP\\FilamentLanguageSwitcher\\Tests\\Database\\Factories\\": "tests/database/factories"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TomatoPHP\\FilamentLanguageSwitcher\\FilamentLanguageSwitcherServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Fady Mondy",
+            "email": "info@3x1.io"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "testbench": "vendor/bin/testbench package:discover --ansi",
+        "db": "vendor/bin/testbench package:create-sqlite-db && vendor/bin/testbench migrate",
+        "analyse": "vendor/bin/phpstan analyse src tests",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "require": {
+        "php": "^8.2|^8.3|^8.4",
+        "tomatophp/console-helpers": "^1.1",
+        "filament/filament": "^4.0-beta",
+        "livewire/livewire": "^2.10|^3.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.21",
+        "nunomaduro/larastan": "^3.1",
+        "orchestra/testbench": "^10.0",
+        "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-laravel": "^3.1",
+        "pestphp/pest-plugin-livewire": "^3.0",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0"
+    },
+    "version": "4.0.0",
+    "minimum-stability": "beta"
+}
+</file>
+
+</files>

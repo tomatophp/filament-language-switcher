@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentLanguageSwitcher;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Contracts\View\View;
 use TomatoPHP\FilamentLanguageSwitcher\Http\Middleware\LanguageMiddleware;
 
@@ -17,7 +18,7 @@ class FilamentLanguageSwitcherPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel->renderHook(
-            config('filament-language-switcher.language_switcher_render_hook'),
+            config('filament-language-switcher.language_switcher_render_hook') ?: PanelsRenderHook::USER_MENU_BEFORE,
             fn (): View => $this->getLanguageSwitcherView()
         );
 

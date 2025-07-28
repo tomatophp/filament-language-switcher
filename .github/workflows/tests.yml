@@ -28,20 +28,13 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.4, 8.3, 8.2]
-        laravel: [12.*, 11.*]
+        laravel: [12.*]
         stability: [prefer-stable]
         include:
           - laravel: 12.*
             testbench: 10.*
             carbon: 3.*
             collision: 8.*
-          - laravel: 11.*
-            testbench: 9.*
-            carbon: 3.*
-            collision: 8.*
-        exclude:
-          - laravel: 11.*
-            php: 8.1
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
     steps:
       - name: Checkout Code
@@ -67,9 +60,9 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          composer config minimum-stability beta
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" "nunomaduro/collision:${{ matrix.collision }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-          composer db
 
       - name: Execute tests
-        run: vendor/bin/pest
+        run: composer test
