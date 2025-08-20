@@ -1,4 +1,4 @@
-![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/3x1io-tomato-language-switcher.jpg)
+![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/fadymondy-tomato-language-switcher.jpg)
 
 # Filament Language Switcher
 
