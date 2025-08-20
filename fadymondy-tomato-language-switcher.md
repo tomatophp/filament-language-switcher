@@ -1,7 +1,7 @@
 ---
 name: Language Switcher
-slug: 3x1io-tomato-language-switcher
-author_slug: 3x1io
+slug: fadymondy-tomato-language-switcher
+author_slug: fadymondy
 categories: [developer-tools]
 description: Switch between languages on your app using user base column on database
 discord_url:
