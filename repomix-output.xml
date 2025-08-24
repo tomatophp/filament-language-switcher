@@ -1,4 +1,4 @@
-This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
 
 <file_summary>
 This section contains a summary of this file.
@@ -32,6 +32,7 @@ The content is organized as follows:
 <notes>
 - Some files may have been excluded based on .gitignore rules and Repomix's configuration
 - Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: **/*.log, tmp/, .js, .html, .blade.php, .css, public/, vendor/, node_modules
 - Files matching patterns in .gitignore are excluded
 - Files matching default ignore patterns are excluded
 - Files are sorted by Git change count (files with more changes are at the bottom)
@@ -95,6 +96,7 @@ resources/
       translation.php
   views/
     language-switcher.blade.php
+    test-page.blade.php
 routes/
   web.php
 src/
@@ -126,9 +128,10 @@ tests/
     TestCase.php
   Pest.php
 .gitignore
-3x1io-tomato-language-switcher.md
 CHANGELOG.md
+CODE_OF_CONDUCT.md
 composer.json
+fadymondy-tomato-language-switcher.md
 LICENSE.md
 module.json
 phpunit.xml
@@ -139,6 +142,137 @@ testbench.yaml
 
 <files>
 This section contains the contents of the repository's files.
+
+<file path="CODE_OF_CONDUCT.md">
+# Contributor Covenant Code of Conduct
+
+## Our Pledge
+
+We as members, contributors, and leaders pledge to make participation in our
+community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, religion, or sexual identity
+and orientation.
+
+We pledge to act and interact in ways that contribute to an open, welcoming,
+diverse, inclusive, and healthy community.
+
+## Our Standards
+
+Examples of behavior that contributes to a positive environment for our
+community include:
+
+* Demonstrating empathy and kindness toward other people
+* Being respectful of differing opinions, viewpoints, and experiences
+* Giving and gracefully accepting constructive feedback
+* Accepting responsibility and apologizing to those affected by our mistakes,
+  and learning from the experience
+* Focusing on what is best not just for us as individuals, but for the
+  overall community
+
+Examples of unacceptable behavior include:
+
+* The use of sexualized language or imagery, and sexual attention or
+  advances of any kind
+* Trolling, insulting or derogatory comments, and personal or political attacks
+* Public or private harassment
+* Publishing others' private information, such as a physical or email
+  address, without their explicit permission
+* Other conduct which could reasonably be considered inappropriate in a
+  professional setting
+
+## Enforcement Responsibilities
+
+Community leaders are responsible for clarifying and enforcing our standards of
+acceptable behavior and will take appropriate and fair corrective action in
+response to any behavior that they deem inappropriate, threatening, offensive,
+or harmful.
+
+Community leaders have the right and responsibility to remove, edit, or reject
+comments, commits, code, wiki edits, issues, and other contributions that are
+not aligned to this Code of Conduct, and will communicate reasons for moderation
+decisions when appropriate.
+
+## Scope
+
+This Code of Conduct applies within all community spaces, and also applies when
+an individual is officially representing the community in public spaces.
+Examples of representing our community include using an official e-mail address,
+posting via an official social media account, or acting as an appointed
+representative at an online or offline event.
+
+## Enforcement
+
+Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported to the community leaders responsible for enforcement at
+.
+All complaints will be reviewed and investigated promptly and fairly.
+
+All community leaders are obligated to respect the privacy and security of the
+reporter of any incident.
+
+## Enforcement Guidelines
+
+Community leaders will follow these Community Impact Guidelines in determining
+the consequences for any action they deem in violation of this Code of Conduct:
+
+### 1. Correction
+
+**Community Impact**: Use of inappropriate language or other behavior deemed
+unprofessional or unwelcome in the community.
+
+**Consequence**: A private, written warning from community leaders, providing
+clarity around the nature of the violation and an explanation of why the
+behavior was inappropriate. A public apology may be requested.
+
+### 2. Warning
+
+**Community Impact**: A violation through a single incident or series
+of actions.
+
+**Consequence**: A warning with consequences for continued behavior. No
+interaction with the people involved, including unsolicited interaction with
+those enforcing the Code of Conduct, for a specified period of time. This
+includes avoiding interactions in community spaces as well as external channels
+like social media. Violating these terms may lead to a temporary or
+permanent ban.
+
+### 3. Temporary Ban
+
+**Community Impact**: A serious violation of community standards, including
+sustained inappropriate behavior.
+
+**Consequence**: A temporary ban from any sort of interaction or public
+communication with the community for a specified period of time. No public or
+private interaction with the people involved, including unsolicited interaction
+with those enforcing the Code of Conduct, is allowed during this period.
+Violating these terms may lead to a permanent ban.
+
+### 4. Permanent Ban
+
+**Community Impact**: Demonstrating a pattern of violation of community
+standards, including sustained inappropriate behavior,  harassment of an
+individual, or aggression toward or disparagement of classes of individuals.
+
+**Consequence**: A permanent ban from any sort of public interaction within
+the community.
+
+## Attribution
+
+This Code of Conduct is adapted from the [Contributor Covenant][homepage],
+version 2.0, available at
+https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.
+
+Community Impact Guidelines were inspired by [Mozilla's code of conduct
+enforcement ladder](https://github.com/mozilla/diversity).
+
+[homepage]: https://www.contributor-covenant.org
+
+For answers to common questions about this code of conduct, see the FAQ at
+https://www.contributor-covenant.org/faq. Translations are available at
+https://www.contributor-covenant.org/translations.
+</file>
 
 <file path=".github/ISSUE_TEMPLATE/bug.yml">
 name: Bug Report
@@ -223,39 +357,6 @@ contact_links:
     about: Learn how to notify us for sensitive bugs
 </file>
 
-<file path=".github/workflows/fix-php-code-styling.yml">
-name: 'PHP Code Styling'
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - '**.php'
-
-permissions:
-  contents: write
-
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Fix PHP code style issues
-        uses: aglipanci/laravel-pint-action@v2
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Format Code"
-          commit_user_name: 'GitHub Actions'
-</file>
-
 <file path=".github/CONTRIBUTING.md">
 # Contributing
 
@@ -329,35 +430,16 @@ updates:
       - "dependencies"
 </file>
 
-<file path=".github/FUNDING.yml">
-github: [3x1io]
-</file>
-
 <file path=".github/SECURITY.md">
 # Security Policy
 
 If you discover any security related issues, please email info@3x1.io instead of using the issue tracker.
 </file>
 
-<file path="routes/web.php">
-<?php
+<file path="resources/views/test-page.blade.php">
+<x-filament::page>
 
-use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/languages/switcher', [\TomatoPHP\FilamentLanguageSwitcher\Http\Controllers\LanguageController::class, 'index'])
-    ->name('languages.switcher')
-    ->middleware(config('filament-language-switcher.language_switcher_middlewares'));
+</x-filament::page>
 </file>
 
 <file path="src/Console/FilamentLanguageSwitcherInstall.php">
@@ -458,68 +540,6 @@ trait InteractsWithLanguages
 }
 </file>
 
-<file path="src/FilamentLanguageSwitcherPlugin.php">
-<?php
-
-namespace TomatoPHP\FilamentLanguageSwitcher;
-
-use Filament\Contracts\Plugin;
-use Filament\Panel;
-use Filament\View\PanelsRenderHook;
-use Illuminate\Contracts\View\View;
-use TomatoPHP\FilamentLanguageSwitcher\Http\Middleware\LanguageMiddleware;
-
-class FilamentLanguageSwitcherPlugin implements Plugin
-{
-    public function getId(): string
-    {
-        return 'filament-language-switcher';
-    }
-
-    public function register(Panel $panel): void
-    {
-        $panel->renderHook(
-            config('filament-language-switcher.language_switcher_render_hook') ?: PanelsRenderHook::USER_MENU_BEFORE,
-            fn (): View => $this->getLanguageSwitcherView()
-        );
-
-        $panel->authMiddleware([
-            LanguageMiddleware::class,
-        ], true);
-    }
-
-    public function boot(Panel $panel): void
-    {
-        //
-    }
-
-    public static function make(): self
-    {
-        return new FilamentLanguageSwitcherPlugin;
-    }
-
-    /**
-     * Returns a View object that renders the language switcher component.
-     *
-     * @return View The View object that renders the language switcher component.
-     */
-    private function getLanguageSwitcherView(): View
-    {
-        $locales = config('filament-language-switcher.locals');
-        $currentLocale = app()->getLocale();
-        $currentLanguage = collect($locales)->firstWhere('code', $currentLocale);
-        $otherLanguages = $locales;
-        $showFlags = config('filament-language-switcher.show_flags');
-
-        return view('filament-language-switcher::language-switcher', compact(
-            'otherLanguages',
-            'currentLanguage',
-            'showFlags',
-        ));
-    }
-}
-</file>
-
 <file path="tests/database/factories/UserFactory.php">
 <?php
 
@@ -585,63 +605,6 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 }
 </file>
 
-<file path="tests/src/AdminPanelProvider.php">
-<?php
-
-namespace TomatoPHP\FilamentLanguageSwitcher\Tests;
-
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
-use Filament\Panel;
-use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
-use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
-
-class AdminPanelProvider extends PanelProvider
-{
-    public function panel(Panel $panel): Panel
-    {
-        return $panel
-            ->default()
-            ->id('test')
-            ->path('test')
-            ->login()
-            ->colors([
-                'primary' => Color::Amber,
-            ])
-            ->pages([
-                Pages\Dashboard::class,
-            ])
-            ->plugin(
-                FilamentLanguageSwitcherPlugin::make()
-            )
-            ->middleware([
-                EncryptCookies::class,
-                AddQueuedCookiesToResponse::class,
-                StartSession::class,
-                AuthenticateSession::class,
-                ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
-                SubstituteBindings::class,
-                DisableBladeIconComponents::class,
-                DispatchServingFilamentEvent::class,
-            ])
-            ->authMiddleware([
-                Authenticate::class,
-            ]);
-    }
-}
-</file>
-
 <file path="tests/src/DebugTest.php">
 <?php
 
@@ -661,25 +624,6 @@ it('check install command', function () {
     $schema = \Illuminate\Support\Facades\Schema::hasTable('user_languages');
 
     expect($schema)->toBeTrue();
-});
-</file>
-
-<file path="tests/src/PluginTest.php">
-<?php
-
-use Filament\Facades\Filament;
-use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
-
-it('registers plugin', function () {
-    $panel = Filament::getCurrentPanel();
-
-    $panel->plugins([
-        FilamentLanguageSwitcherPlugin::make(),
-    ]);
-
-    expect($panel->getPlugin('filament-language-switcher'))
-        ->not()
-        ->toThrow(Exception::class);
 });
 </file>
 
@@ -723,6 +667,23 @@ yarn-error.log
 First release of the package
 </file>
 
+<file path="fadymondy-tomato-language-switcher.md">
+---
+name: Language Switcher
+slug: fadymondy-tomato-language-switcher
+author_slug: fadymondy
+categories: [developer-tools]
+description: Switch between languages on your app using user base column on database
+discord_url:
+docs_url: https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/README.md
+github_repository: tomatophp/filament-language-switcher
+has_dark_theme: true
+has_translations: true
+versions: [3,4]
+publish_date: 2024-10-23
+---
+</file>
+
 <file path="LICENSE.md">
 The MIT License (MIT)
 
@@ -747,70 +708,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </file>
 
-<file path="phpunit.xml">
-<?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         backupGlobals="false"
-         bootstrap="vendor/autoload.php"
-         colors="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
-         cacheDirectory=".phpunit.cache"
-         backupStaticProperties="false"
->
-    <testsuites>
-        <testsuite name="Tests">
-            <directory suffix=".php">./tests/</directory>
-        </testsuite>
-    </testsuites>
-    <source>
-        <include>
-            <directory suffix=".php">./src</directory>
-        </include>
-    </source>
-    <php>
-        <env name="APP_ENV" value="self-testing"/>
-        <env name="APP_KEY" value="base64:yk+bUVuZa1p86Dqjk9OjVK2R1pm6XHxC6xEKFq8utH0="/>
-        <env name="DB_CONNECTION" value="sqlite"/>
-        <env name="DB_DATABASE" value="/vendor/tomatophp/filament-language-switcher/tests/database/database.sqlite"/>
-    </php>
-</phpunit>
-</file>
-
 <file path="SECURITY.md">
 # Security Policy
 
 If you discover any security related issues, please email info@3x1.io instead of using the issue tracker.
 </file>
 
-<file path="testbench.yaml">
-providers:
-  - BladeUI\Icons\BladeIconsServiceProvider
-  - BladeUI\Heroicons\BladeHeroiconsServiceProvider
-  - Livewire\LivewireServiceProvider
-  - Filament\Actions\ActionsServiceProvider
-  - Filament\FilamentServiceProvider
-  - Filament\Forms\FormsServiceProvider
-  - Filament\Infolists\InfolistsServiceProvider
-  - Filament\Notifications\NotificationsServiceProvider
-  - Filament\Support\SupportServiceProvider
-  - Filament\Schemas\SchemasServiceProvider
-  - Filament\Tables\TablesServiceProvider
-  - Filament\Widgets\WidgetsServiceProvider
-  - RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider
-  - TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherServiceProvider
-  - TomatoPHP\FilamentLanguageSwitcher\Tests\AdminPanelProvider
-workbench:
-  welcome: true
-  install: true
-  start: /
-  guard: testing
-  discovers:
-    web: true
-    api: false
-    commands: false
-    views: true
+<file path=".github/FUNDING.yml">
+github: [fadymondy]
 </file>
 
 <file path="resources/lang/fr/translation.php">
@@ -1239,6 +1144,89 @@ return [
 ];
 </file>
 
+<file path="routes/web.php">
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/languages/switcher', [\TomatoPHP\FilamentLanguageSwitcher\Http\Controllers\LanguageController::class, 'index'])
+    ->name('languages.switcher')
+    ->middleware(config('filament-language-switcher.language_switcher_middlewares'));
+</file>
+
+<file path="src/FilamentLanguageSwitcherPlugin.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher;
+
+use Filament\Contracts\Plugin;
+use Filament\Panel;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
+use TomatoPHP\FilamentLanguageSwitcher\Http\Middleware\LanguageMiddleware;
+
+class FilamentLanguageSwitcherPlugin implements Plugin
+{
+    public function getId(): string
+    {
+        return 'filament-language-switcher';
+    }
+
+    public function register(Panel $panel): void
+    {
+        $panel->renderHook(
+            config('filament-language-switcher.language_switcher_render_hook') ?: PanelsRenderHook::USER_MENU_BEFORE,
+            fn (): View => $this->getLanguageSwitcherView()
+        );
+
+        $panel->authMiddleware([
+            LanguageMiddleware::class,
+        ], true);
+    }
+
+    public function boot(Panel $panel): void
+    {
+        //
+    }
+
+    public static function make(): self
+    {
+        return new FilamentLanguageSwitcherPlugin;
+    }
+
+    /**
+     * Returns a View object that renders the language switcher component.
+     *
+     * @return View The View object that renders the language switcher component.
+     */
+    private function getLanguageSwitcherView(): View
+    {
+        $locales = config('filament-language-switcher.locals');
+        $currentLocale = app()->getLocale();
+        $currentLanguage = collect($locales)->firstWhere('code', $currentLocale);
+        $otherLanguages = $locales;
+        $showFlags = config('filament-language-switcher.show_flags');
+
+        return view('filament-language-switcher::language-switcher', compact(
+            'otherLanguages',
+            'currentLanguage',
+            'showFlags',
+        ));
+    }
+}
+</file>
+
 <file path="src/FilamentLanguageSwitcherServiceProvider.php">
 <?php
 
@@ -1297,21 +1285,144 @@ class FilamentLanguageSwitcherServiceProvider extends ServiceProvider
 }
 </file>
 
-<file path="3x1io-tomato-language-switcher.md">
----
-name: Language Switcher
-slug: 3x1io-tomato-language-switcher
-author_slug: 3x1io
-categories: [developer-tools]
-description: Switch between languages on your app using user base column on database
-discord_url:
-docs_url: https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/README.md
-github_repository: tomatophp/filament-language-switcher
-has_dark_theme: true
-has_translations: true
-versions: [3]
-publish_date: 2024-10-23
----
+<file path="tests/src/AdminPanelProvider.php">
+<?php
+
+namespace TomatoPHP\FilamentLanguageSwitcher\Tests;
+
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Pages;
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\Support\Colors\Color;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
+
+class AdminPanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        $panel
+            ->default()
+            ->id('admin')
+            ->path('admin')
+            ->login()
+            ->colors([
+                'primary' => Color::Amber,
+            ])
+            ->pages([
+                Pages\Dashboard::class,
+            ])
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+            ])
+            ->authMiddleware([
+                Authenticate::class,
+            ]);
+
+        $panel->plugin(
+            FilamentLanguageSwitcherPlugin::make()
+        );
+
+        return $panel;
+    }
+}
+</file>
+
+<file path="tests/src/PluginTest.php">
+<?php
+
+use Filament\Facades\Filament;
+use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
+
+it('registers plugin', function () {
+    $panel = Filament::getCurrentOrDefaultPanel();
+
+    $panel->plugins([
+        FilamentLanguageSwitcherPlugin::make(),
+    ]);
+
+    expect($panel->getPlugin('filament-language-switcher'))
+        ->not()
+        ->toThrow(Exception::class);
+});
+</file>
+
+<file path="phpunit.xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         backupGlobals="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
+         cacheDirectory=".phpunit.cache"
+         backupStaticProperties="false"
+>
+    <testsuites>
+        <testsuite name="Tests">
+            <directory suffix=".php">./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="self-testing"/>
+        <env name="APP_KEY" value="base64:yk+bUVuZa1p86Dqjk9OjVK2R1pm6XHxC6xEKFq8utH0="/>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="SESSION_DRIVER" value="file"/>
+        <env name="DB_DATABASE" value="/vendor/tomatophp/filament-language-switcher/tests/database/database.sqlite"/>
+    </php>
+</phpunit>
+</file>
+
+<file path="testbench.yaml">
+providers:
+  - BladeUI\Icons\BladeIconsServiceProvider
+  - BladeUI\Heroicons\BladeHeroiconsServiceProvider
+  - Livewire\LivewireServiceProvider
+  - Filament\Actions\ActionsServiceProvider
+  - Filament\FilamentServiceProvider
+  - Filament\Forms\FormsServiceProvider
+  - Filament\Infolists\InfolistsServiceProvider
+  - Filament\Notifications\NotificationsServiceProvider
+  - Filament\Support\SupportServiceProvider
+  - Filament\Schemas\SchemasServiceProvider
+  - Filament\Tables\TablesServiceProvider
+  - Filament\Widgets\WidgetsServiceProvider
+  - RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider
+  - TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherServiceProvider
+  - TomatoPHP\FilamentLanguageSwitcher\Tests\AdminPanelProvider
+workbench:
+  welcome: true
+  install: true
+  start: /
+  guard: testing
+  discovers:
+    web: true
+    api: false
+    commands: false
+    views: true
 </file>
 
 <file path=".github/workflows/dependabot-auto-merge.yml">
@@ -1349,6 +1460,39 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 </file>
 
+<file path=".github/workflows/fix-php-code-styling.yml">
+name: 'PHP Code Styling'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.php'
+
+permissions:
+  contents: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Fix PHP code style issues
+        uses: aglipanci/laravel-pint-action@v2
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: "Format Code"
+          commit_user_name: 'GitHub Actions'
+</file>
+
 <file path="database/migrations/2024_10_23_010712_create_user_languages_table.php">
 <?php
 
@@ -1379,43 +1523,6 @@ return new class extends Migration
         Schema::dropIfExists('user_languages');
     }
 };
-</file>
-
-<file path="resources/views/language-switcher.blade.php">
-@php
-if(!function_exists('try_svg')) {
-    function try_svg($name, $classes) {
-        try {
-            return svg($name, $classes);
-        }
-        catch(\Exception $e) {
-            return '❓';
-        }
-    }
-}
-@endphp
-
-
-<x-filament::dropdown >
-    <x-slot name="trigger">
-        <x-filament::avatar x-tooltip="{
-            content: '{{ trans('filament-language-switcher::translation.change') }}',
-            theme: $store.theme,
-        }" id="filament-language-switcher" size="sm" src="https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/{{config('filament-language-switcher.locals')[app()->getLocale()]['flag']?:null}}.svg" />
-    </x-slot>
-
-    @foreach ($otherLanguages as $key=>$language)
-        @php $isCurrent = app()->getLocale() === $key; @endphp
-            <x-filament::dropdown.list.item
-                :image="'https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/'.$language['flag'].'.svg'"
-                tag="a"
-                :href="route('languages.switcher', parameters: ['lang' => $key, 'model' => get_class(auth()->user()), 'model_id' => \Filament\Facades\Filament::auth()->user()->id])"
-            >
-                    <span @class(['font-semibold' => $isCurrent])>{{ trans('filament-language-switcher::translation.lang.'.$key) }}</span>
-
-            </x-filament::dropdown.list.item>
-    @endforeach
-</x-filament::dropdown>
 </file>
 
 <file path="src/Models/UserLanguage.php">
@@ -1470,9 +1577,9 @@ class UserLanguage extends Model
     },
     "color": "#cc1448",
     "icon": "heroicon-c-users",
-    "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/3x1io-tomato-language-switcher.jpg",
+    "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/fadymondy-tomato-language-switcher.jpg",
     "type": "plugin",
-    "version": "v1.0.6",
+    "version": "v4.0.0",
     "github" : "https://github.com/tomatophp/filament-language-switcher",
     "docs" : "https://github.com/tomatophp/filament-language-switcher"
 }
@@ -1856,70 +1963,41 @@ return [
 ];
 </file>
 
-<file path="tests/src/TestCase.php">
-<?php
-
-namespace TomatoPHP\FilamentLanguageSwitcher\Tests;
-
-use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
-use BladeUI\Icons\BladeIconsServiceProvider;
-use Filament\Actions\ActionsServiceProvider;
-use Filament\FilamentServiceProvider;
-use Filament\Forms\FormsServiceProvider;
-use Filament\Infolists\InfolistsServiceProvider;
-use Filament\Notifications\NotificationsServiceProvider;
-use Filament\Support\SupportServiceProvider;
-use Filament\Tables\TablesServiceProvider;
-use Filament\Widgets\WidgetsServiceProvider;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\LivewireServiceProvider;
-use Orchestra\Testbench\Attributes\WithEnv;
-use Orchestra\Testbench\Concerns\WithWorkbench;
-use Orchestra\Testbench\TestCase as BaseTestCase;
-use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherServiceProvider;
-
-#[WithEnv('DB_CONNECTION', 'testing')]
-abstract class TestCase extends BaseTestCase
-{
-    use RefreshDatabase;
-    use WithWorkbench;
-
-    protected function getPackageProviders($app): array
-    {
-        return [
-            ActionsServiceProvider::class,
-            BladeCaptureDirectiveServiceProvider::class,
-            BladeHeroiconsServiceProvider::class,
-            BladeIconsServiceProvider::class,
-            FilamentServiceProvider::class,
-            FormsServiceProvider::class,
-            InfolistsServiceProvider::class,
-            LivewireServiceProvider::class,
-            NotificationsServiceProvider::class,
-            SupportServiceProvider::class,
-            TablesServiceProvider::class,
-            WidgetsServiceProvider::class,
-            FilamentLanguageSwitcherServiceProvider::class,
-            AdminPanelProvider::class,
-        ];
-    }
-
-    protected function defineDatabaseMigrations(): void
-    {
-        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
-    }
-
-    public function getEnvironmentSetUp($app): void
-    {
-        $app['config']->set('database.default', 'testing');
-
-        $app['config']->set('view.paths', [
-            ...$app['config']->get('view.paths'),
-            __DIR__.'/../resources/views',
-        ]);
+<file path="resources/views/language-switcher.blade.php">
+@php
+if(!function_exists('try_svg')) {
+    function try_svg($name, $classes) {
+        try {
+            return svg($name, $classes);
+        }
+        catch(\Exception $e) {
+            return '❓';
+        }
     }
 }
+@endphp
+
+
+<x-filament::dropdown >
+    <x-slot name="trigger">
+        <x-filament::avatar x-tooltip="{
+            content: '{{ trans('filament-language-switcher::translation.change') }}',
+            theme: $store.theme,
+        }" id="filament-language-switcher" size="sm" src="https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/{{config('filament-language-switcher.locals')[app()->getLocale()]['flag']?:null}}.svg" />
+    </x-slot>
+
+    @foreach ($otherLanguages as $key=>$language)
+        @php $isCurrent = app()->getLocale() === $key; @endphp
+            <x-filament::dropdown.list.item
+                :image="'https://cdn.jsdelivr.net/gh/hampusborgos/country-flags@main/svg/'.$language['flag'].'.svg'"
+                tag="a"
+                :href="route('languages.switcher', parameters: ['lang' => $key, 'model' => get_class(auth()->user()), 'model_id' => \Filament\Facades\Filament::auth()->user()->id])"
+            >
+                    <span @class(['font-semibold' => $isCurrent])>{{ trans('filament-language-switcher::translation.lang.'.$key) }}</span>
+
+            </x-filament::dropdown.list.item>
+    @endforeach
+</x-filament::dropdown>
 </file>
 
 <file path="src/Http/Controllers/LanguageController.php">
@@ -1980,76 +2058,78 @@ class LanguageController
 }
 </file>
 
-<file path=".github/workflows/tests.yml">
-name: "Tests"
+<file path="tests/src/TestCase.php">
+<?php
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - '**.php'
-  pull_request:
-    types:
-      - opened
-      - synchronize
-    branches:
-      - master
-    paths:
-      - '**.php'
-      - '.github/workflows/tests.yml'
-      - 'phpunit.xml.dist'
-      - 'composer.json'
-      - 'composer.lock'
+namespace TomatoPHP\FilamentLanguageSwitcher\Tests;
 
-jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest]
-        php: [8.4, 8.3, 8.2]
-        laravel: [12.*]
-        stability: [prefer-stable]
-        include:
-          - laravel: 12.*
-            testbench: 10.*
-            carbon: 3.*
-            collision: 8.*
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
+use BladeUI\Icons\BladeIconsServiceProvider;
+use Filament\Actions\ActionsServiceProvider;
+use Filament\FilamentServiceProvider;
+use Filament\Forms\FormsServiceProvider;
+use Filament\Infolists\InfolistsServiceProvider;
+use Filament\Notifications\NotificationsServiceProvider;
+use Filament\Schemas\SchemasServiceProvider;
+use Filament\Support\SupportServiceProvider;
+use Filament\Tables\TablesServiceProvider;
+use Filament\Widgets\WidgetsServiceProvider;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Livewire\LivewireServiceProvider;
+use Orchestra\Testbench\Attributes\WithEnv;
+use Orchestra\Testbench\Concerns\WithWorkbench;
+use Orchestra\Testbench\TestCase as BaseTestCase;
+use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
+use TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherServiceProvider;
+use TomatoPHP\FilamentLanguageSwitcher\Tests\Models\User;
 
-      - name: Cache Dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.composer/cache/files
-          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+#[WithEnv('DB_CONNECTION', 'testing')]
+abstract class TestCase extends BaseTestCase
+{
+    use LazilyRefreshDatabase;
+    use WithWorkbench;
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-          coverage: none
+    protected function getPackageProviders($app): array
+    {
+        $providers = [
+            ActionsServiceProvider::class,
+            BladeCaptureDirectiveServiceProvider::class,
+            BladeHeroiconsServiceProvider::class,
+            BladeIconsServiceProvider::class,
+            FilamentServiceProvider::class,
+            FormsServiceProvider::class,
+            InfolistsServiceProvider::class,
+            SchemasServiceProvider::class,
+            LivewireServiceProvider::class,
+            NotificationsServiceProvider::class,
+            SupportServiceProvider::class,
+            TablesServiceProvider::class,
+            WidgetsServiceProvider::class,
+            FilamentLanguageSwitcherServiceProvider::class,
+            AdminPanelProvider::class,
+        ];
 
-      - name: Install Dependencies
-        run: |
-          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+        sort($providers);
 
-      - name: Install Dependencies
-        run: |
-          composer config minimum-stability beta
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" "nunomaduro/collision:${{ matrix.collision }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-          composer db
+        return $providers;
+    }
 
-      - name: Execute tests
-        run: vendor/bin/pest
+    protected function defineDatabaseMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+    }
+
+    public function getEnvironmentSetUp($app): void
+    {
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('auth.providers.users.model', User::class);
+
+        $app['config']->set('view.paths', [
+            ...$app['config']->get('view.paths'),
+            __DIR__.'/../resources/views',
+        ]);
+    }
+}
 </file>
 
 <file path="config/filament-language-switcher.php">
@@ -2189,10 +2269,7 @@ return [
 <?php
 
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
-use Illuminate\Support\ViewErrorBag;
 use TomatoPHP\FilamentLanguageSwitcher\Tests\Models\User;
 
 use function Pest\Laravel\actingAs;
@@ -2204,26 +2281,21 @@ beforeEach(function () {
 });
 
 it('has a language switcher', function () {
-    $errors = new \Illuminate\Support\ViewErrorBag;
-    $errors->put('default', new \Illuminate\Support\MessageBag);
-    session()->put('errors', $errors);
-    // Render the view
-    // Perform a GET request to fetch the HTML content of the page
-    $response = get(\Filament\Pages\Dashboard::getUrl()); // replace with your route
+    // // Ensure the response status is OK (200)
+    $response = get(\Filament\Pages\Dashboard::getUrl());
 
-    // Ensure the response status is OK (200)
     $response->assertStatus(200);
 
-    // Get the HTML content of the response
+    // // Get the HTML content of the response
     $html = $response->getContent();
 
-    // Use Laravel's native Crawler (based on Symfony's DomCrawler)
+    // // Use Laravel's native Crawler (based on Symfony's DomCrawler)
     $crawler = Str::of($html);
 
-    // Check if the element with the specific ID exists
+    // // Check if the element with the specific ID exists
     $elementExists = $crawler->contains('id="filament-language-switcher"'); // replace 'your-id-here' with the actual id you're checking
 
-    // Assert that the element exists
+    // // Assert that the element exists
     expect($elementExists)->toBeTrue();
 });
 
@@ -2276,8 +2348,156 @@ it('sends a notification in the newly selected language', function (string $loca
 })->with(['locale' => ['en', 'nl', 'ar', 'de']]);
 </file>
 
+<file path=".github/workflows/tests.yml">
+name: "Tests"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.php'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - master
+    paths:
+      - '**.php'
+      - '.github/workflows/tests.yml'
+      - 'phpunit.xml.dist'
+      - 'composer.json'
+      - 'composer.lock'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.4, 8.3, 8.2]
+        laravel: [12.*]
+        stability: [prefer-stable]
+        include:
+          - laravel: 12.*
+            testbench: 10.*
+            carbon: 3.*
+            collision: 8.*
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Install Dependencies
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install Dependencies
+        run: |
+          composer config minimum-stability beta
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" "nunomaduro/collision:${{ matrix.collision }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
+      - name: Execute tests
+        run: composer test
+</file>
+
+<file path="composer.json">
+{
+    "name": "tomatophp/filament-language-switcher",
+    "type": "library",
+    "description": "Switch between languages on your app using user base column on database",
+    "keywords": [
+        "php",
+        "laravel",
+        "language-switch",
+        "filament-plugin",
+        "tomatophp"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TomatoPHP\\FilamentLanguageSwitcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TomatoPHP\\FilamentLanguageSwitcher\\Tests\\": "tests/src/",
+            "TomatoPHP\\FilamentLanguageSwitcher\\Tests\\Database\\Factories\\": "tests/database/factories"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TomatoPHP\\FilamentLanguageSwitcher\\FilamentLanguageSwitcherServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Fady Mondy",
+            "email": "info@3x1.io"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "testbench": "vendor/bin/testbench package:discover --ansi",
+        "db": "vendor/bin/testbench package:create-sqlite-db && vendor/bin/testbench migrate",
+        "analyse": "vendor/bin/phpstan analyse src tests",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "require": {
+        "php": "^8.2|^8.3|^8.4",
+        "tomatophp/console-helpers": "^1.1",
+        "filament/filament": "^4.0-beta",
+        "livewire/livewire": "^3.6"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.9||^3.0",
+        "laravel/pint": "^1.14",
+        "nunomaduro/collision": "^8.1.1||^7.10.0",
+        "orchestra/testbench": "^10.0.0||^9.0.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-arch": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "pestphp/pest-plugin-livewire": "^3.0",
+        "pestphp/pest-plugin-type-coverage": "^3.5",
+        "phpstan/extension-installer": "^1.3||^2.0",
+        "phpstan/phpstan-deprecation-rules": "^1.1||^2.0",
+        "phpstan/phpstan-phpunit": "^1.3||^2.0"
+    },
+    "version": "4.0.0",
+    "minimum-stability": "beta"
+}
+</file>
+
 <file path="README.md">
-![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/3x1io-tomato-language-switcher.jpg)
+![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/fadymondy-tomato-language-switcher.jpg)
 
 # Filament Language Switcher
 
@@ -2292,9 +2512,10 @@ Switch between languages on your app using user base column on database
 
 ## Screenshots
 
-![Switcher](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/switcher.png)
-![Dropdown Ar](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-ar.png)
-![Dropdown En](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-en.png)
+![Switcher Light](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/switcher-light.png)
+![RTL](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/rtl.png)
+![Dropdown Light](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-light.png)
+![Dropdown Dark](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/dropdown-dark.png)
 
 ## Installation
 
@@ -2374,80 +2595,6 @@ composer analyse
 ## Other Filament Packages
 
 Checkout our [Awesome TomatoPHP](https://github.com/tomatophp/awesome)
-</file>
-
-<file path="composer.json">
-{
-    "name": "tomatophp/filament-language-switcher",
-    "type": "library",
-    "description": "Switch between languages on your app using user base column on database",
-    "keywords": [
-        "php",
-        "laravel",
-        "language-switch",
-        "filament-plugin",
-        "tomatophp"
-    ],
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "TomatoPHP\\FilamentLanguageSwitcher\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "TomatoPHP\\FilamentLanguageSwitcher\\Tests\\": "tests/src/",
-            "TomatoPHP\\FilamentLanguageSwitcher\\Tests\\Database\\Factories\\": "tests/database/factories"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "TomatoPHP\\FilamentLanguageSwitcher\\FilamentLanguageSwitcherServiceProvider"
-            ]
-        }
-    },
-    "authors": [
-        {
-            "name": "Fady Mondy",
-            "email": "info@3x1.io"
-        }
-    ],
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
-        }
-    },
-    "scripts": {
-        "testbench": "vendor/bin/testbench package:discover --ansi",
-        "db": "vendor/bin/testbench package:create-sqlite-db && vendor/bin/testbench migrate",
-        "analyse": "vendor/bin/phpstan analyse src tests",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
-    },
-    "require": {
-        "php": "^8.2|^8.3|^8.4",
-        "tomatophp/console-helpers": "^1.1",
-        "filament/filament": "^4.0-beta",
-        "livewire/livewire": "^2.10|^3.0"
-    },
-    "require-dev": {
-        "laravel/pint": "^1.21",
-        "nunomaduro/larastan": "^3.1",
-        "orchestra/testbench": "^10.0",
-        "pestphp/pest": "^3.7",
-        "pestphp/pest-plugin-laravel": "^3.1",
-        "pestphp/pest-plugin-livewire": "^3.0",
-        "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0"
-    },
-    "version": "4.0.0",
-    "minimum-stability": "beta"
-}
 </file>
 
 </files>
