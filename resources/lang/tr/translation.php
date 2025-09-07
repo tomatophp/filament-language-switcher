@@ -16,6 +16,7 @@ return [
         'ru' => 'Rusça',
         'zh' => 'Çince',
         'ja' => 'Japonca',
+        'km' => 'Kamboja',
         'ko' => 'Korece',
         'hi' => 'Hintçe',
         'th' => 'Tayca',
