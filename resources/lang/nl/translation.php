@@ -16,6 +16,7 @@ return [
         'ru' => 'Russisch',
         'zh' => 'Chinees',
         'ja' => 'Japans',
+        'km' => 'Kambojaans',
         'ko' => 'Koreaans',
         'hi' => 'Hindi',
         'th' => 'Thais',

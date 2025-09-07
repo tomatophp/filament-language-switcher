@@ -16,6 +16,7 @@ return [
         'ru' => 'Rusia',
         'zh' => 'Cina',
         'ja' => 'Jepang',
+        'km' => 'Kamboja',
         'ko' => 'Korea',
         'hi' => 'Hindi',
         'th' => 'Thai',

@@ -48,6 +48,10 @@ return [
             'label' => 'Chinese',
             'flag' => 'cn',
         ],
+        'km' => [
+            'label' => 'Khmer',
+            'flag' => 'kh',
+        ],
         'ko' => [
             'label' => 'Korean',
             'flag' => 'kr',
