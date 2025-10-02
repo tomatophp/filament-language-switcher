@@ -19,7 +19,7 @@ class LanguageMiddleware
             if (! empty($request->user()->lang)) {
                 app()->setLocale($request->user()->lang);
             } else {
-                app()->setLocale('en');
+                app()->setLocale(config('app.locale', 'en'));
             }
         }
 
