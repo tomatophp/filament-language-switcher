@@ -80,6 +80,10 @@ return [
             'label' => 'Indonesian',
             'flag' => 'id',
         ],
+        'nl' => [
+            'label' => 'Dutch',
+            'flag' => 'nl',
+        ],
     ],
 
     /*

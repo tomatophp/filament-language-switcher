@@ -46,7 +46,7 @@ class FilamentLanguageSwitcherPlugin implements Plugin
     {
         $locales = config('filament-language-switcher.locals');
         $currentLocale = app()->getLocale();
-        $currentLanguage = collect($locales)->firstWhere('code', $currentLocale);
+        $currentLanguage = $locales[$currentLocale] ?? null;
         $otherLanguages = $locales;
         $showFlags = config('filament-language-switcher.show_flags');
 

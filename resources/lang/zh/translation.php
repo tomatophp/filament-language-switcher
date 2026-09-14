@@ -4,6 +4,7 @@ return [
     // Translate to Chinese
     'change' => '更改语言',
     'lang' => [
+        'nl' => '荷兰语',
         'ar' => '阿拉伯语',
         'en' => '英语',
         'pt_BR' => '葡萄牙语（巴西）',

@@ -1,6 +1,7 @@
 <?php
 
 use Filament\Notifications\Notification;
+use Filament\Pages\Dashboard;
 use Illuminate\Support\Str;
 use TomatoPHP\FilamentLanguageSwitcher\Tests\Models\User;
 
@@ -14,7 +15,7 @@ beforeEach(function () {
 
 it('has a language switcher', function () {
     // // Ensure the response status is OK (200)
-    $response = get(\Filament\Pages\Dashboard::getUrl());
+    $response = get(Dashboard::getUrl());
 
     $response->assertStatus(200);
 

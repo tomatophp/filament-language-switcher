@@ -4,6 +4,7 @@ return [
     // Translate to Korean
     'change' => '언어 변경',
     'lang' => [
+        'nl' => '네덜란드어',
         'ar' => '아랍어',
         'en' => '영어',
         'pt_BR' => '포르투갈어 (브라질)',

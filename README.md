@@ -11,6 +11,14 @@
 
 Switch between languages on your app using user base column on database
 
+## Version Compatibility
+
+| Plugin | Filament | Laravel | PHP |
+|--------|----------|---------|-----|
+| 1.x | 3.x | 10.x / 11.x | 8.1+ |
+| 4.x ([`4.x` branch](https://github.com/tomatophp/filament-language-switcher/tree/4.x)) | 4.x | 11.x / 12.x | 8.2+ |
+| 5.x | 5.x | 12.x / 13.x | 8.2+ |
+
 ## Screenshots
 
 ![Switcher Light](https://raw.githubusercontent.com/tomatophp/filament-language-switcher/master/arts/switcher-light.png)
@@ -42,6 +50,29 @@ use \TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
 ```
 
 now you must see the switcher and you can change language as you like
+
+If your user table has a `lang` column it is used, otherwise the language is stored in the `user_languages` table.
+Users who never picked a language get `app.locale`.
+
+## Languages
+
+The languages shown in the switcher come from the `locals` key of the config file. Each language needs a `label` and a `flag`
+(a country code from [country-flags](https://github.com/hampusborgos/country-flags)):
+
+```php
+'locals' => [
+    'en' => ['label' => 'English', 'flag' => 'gb'],
+    'nl' => ['label' => 'Dutch', 'flag' => 'nl'],
+],
+```
+
+The package names every default language in 18 languages; a language without a translated name shows its `label`.
+Set `show_flags` to `false` to hide the flags in the list.
+
+## Security
+
+The switch route (`/languages/switcher?lang=xx`) only changes the language of the signed in user. Guests get a 403 and languages that are not
+in `locals` are rejected. The `model` and `model_id` parameters sent by older versions are ignored.
 
 ## Publish Assets
 

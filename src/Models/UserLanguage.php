@@ -13,11 +13,6 @@ class UserLanguage extends Model
         'lang',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
-
     public function model(): MorphTo
     {
         return $this->morphTo();

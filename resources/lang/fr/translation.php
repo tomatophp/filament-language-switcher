@@ -3,6 +3,7 @@
 return [
     'change' => 'Changer la langue',
     'lang' => [
+        'nl' => 'Néerlandais',
         'ar' => 'Arabe',
         'en' => 'Anglais',
         'pt_BR' => 'Portugais (Brésil)',

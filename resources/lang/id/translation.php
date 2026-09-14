@@ -3,6 +3,7 @@
 return [
     'change' => 'Ubah Bahasa',
     'lang' => [
+        'nl' => 'Belanda',
         'ar' => 'Arab',
         'en' => 'Inggris',
         'pt_BR' => 'Portugis (Brazil)',

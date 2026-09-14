@@ -3,6 +3,7 @@
 return [
     'change' => 'Dil Değiştir',
     'lang' => [
+        'nl' => 'Felemenkçe',
         'ar' => 'Arapça',
         'en' => 'İngilizce',
         'pt_BR' => 'Portekizce (Brezilya)',

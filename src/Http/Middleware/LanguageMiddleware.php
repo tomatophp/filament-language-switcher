@@ -4,23 +4,21 @@ namespace TomatoPHP\FilamentLanguageSwitcher\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class LanguageMiddleware
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param  Closure(Request): Response  $next
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()) {
-            if (! empty($request->user()->lang)) {
-                app()->setLocale($request->user()->lang);
-            } else {
-                app()->setLocale(config('app.locale', 'en'));
-            }
+        $user = $request->user();
+
+        if ($user) {
+            app()->setLocale(! empty($user->lang) ? $user->lang : config('app.locale', 'en'));
         }
 
         return $next($request);
