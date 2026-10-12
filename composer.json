@@ -2,6 +2,12 @@
     "name": "tomatophp/filament-language-switcher",
     "type": "library",
     "description": "Switch between languages on your app using user base column on database",
+    "homepage": "https://tomatophp.com/en/plugins/filament-language-switcher",
+    "support": {
+        "issues": "https://github.com/tomatophp/filament-language-switcher/issues",
+        "source": "https://github.com/tomatophp/filament-language-switcher",
+        "docs": "https://tomatophp.com/en/plugins/filament-language-switcher"
+    },
     "keywords": [
         "php",
         "laravel",
